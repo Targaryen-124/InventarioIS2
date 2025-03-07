@@ -37,46 +37,39 @@ public class Login extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jTFUsuario = new javax.swing.JTextField();
+        jTFContra = new javax.swing.JTextField();
         jBtnIngresar = new javax.swing.JButton();
         jBtnSalir = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jTFContra = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login");
         setResizable(false);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setText("Sistema de Inventario");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(161, 142, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setText("Usuario");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(117, 182, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Contraseña");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(117, 214, -1, -1));
 
         jTFUsuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jPanel1.add(jTFUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(197, 179, 180, -1));
+
+        jTFContra.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jBtnIngresar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jBtnIngresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/contrasena.png"))); // NOI18N
         jBtnIngresar.setText("Ingresar");
         jBtnIngresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnIngresarActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 260, -1, -1));
 
         jBtnSalir.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jBtnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/cancelar-compras.png"))); // NOI18N
         jBtnSalir.setText("Salir");
         jBtnSalir.setMaximumSize(new java.awt.Dimension(80, 27));
         jBtnSalir.setMinimumSize(new java.awt.Dimension(80, 27));
@@ -86,18 +79,79 @@ public class Login extends javax.swing.JFrame {
                 jBtnSalirActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 260, 114, 41));
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/inventario.png"))); // NOI18N
-        jLabel4.setMaximumSize(new java.awt.Dimension(512, 512));
-        jLabel4.setMinimumSize(new java.awt.Dimension(512, 512));
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(183, 8, -1, -1));
+        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Yohana Padilla\\Documents\\NetBeansProjects\\InventarioIS\\Iconos\\avatar_user_icon_259523.png")); // NOI18N
 
-        jTFContra.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jPanel1.add(jTFContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(197, 211, 180, -1));
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(45, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTFUsuario)
+                    .addComponent(jTFContra, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jLabel4)))
+                .addGap(47, 47, 47))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(97, 97, 97)
+                        .addComponent(jBtnIngresar)
+                        .addGap(30, 30, 30)
+                        .addComponent(jBtnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(101, 101, 101)
+                        .addComponent(jLabel2)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel1))
+                    .addComponent(jTFUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTFContra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBtnIngresar)
+                    .addComponent(jBtnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19))
+        );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 460, 310));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
         pack();
         setLocationRelativeTo(null);
@@ -108,43 +162,53 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnSalirActionPerformed
 
     private void jBtnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIngresarActionPerformed
-     String usuario = jTFUsuario.getText();
-     String contraseña = new String(jTFContra.getPassword());
+        String usuario = jTFUsuario.getText();
+        String contraseña = jTFContra.getText();
 
-     String rol = validarCredenciales(usuario, contraseña); // usamos el nuevo método
-
-      if (rol != null) {
-          Principal principal = new Principal(rol);
-          java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                principal.setExtendedState(JFrame.MAXIMIZED_BOTH);
-                principal.setVisible(true);
-            }
-        });
-        dispose();
-    } else {
-        javax.swing.JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos", "Error de autenticación", javax.swing.JOptionPane.ERROR_MESSAGE);
+        if (validarCredenciales(usuario, contraseña)) {
+            Principal principal = new Principal();
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    principal.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                    principal.setVisible(true);
+                    dispose();
+                }
+            });
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos", "Error de autenticación", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
     }
-}
-    
-    private String validarCredenciales(String usuario, String contraseña) {
-         String sql = "SELECT rol FROM usuarios WHERE usuario = ? AND password = ? AND activo = 1";
-        try (Connection conn = new Conexion().estableceConexion();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
+    private boolean validarCredenciales(String usuario, String contraseña) {
+        String sql = "SELECT * FROM usuarios WHERE usuario = ? AND password = ? AND activo = 1";
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            // Obtener la conexión usando tu método
+            conn = new Conexion().estableceConexion();
+            pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, usuario);
             pstmt.setString(2, contraseña);
 
-            ResultSet rs = pstmt.executeQuery();
+            rs = pstmt.executeQuery();
+            return rs.next(); // Si hay un resultado, las credenciales son válidas
 
-            if (rs.next()) {
-                return rs.getString("rol");
-            }
         } catch (SQLException e) {
             e.printStackTrace();
-            javax.swing.JOptionPane.showMessageDialog(this, "Error al verificar credenciales:\n" + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            javax.swing.JOptionPane.showMessageDialog(this, "Error al conectar con la base de datos", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return false;
+        } finally {
+            // Cerrar los recursos en el bloque finally
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
-        return null;
     }//GEN-LAST:event_jBtnIngresarActionPerformed
 
     /**
@@ -190,7 +254,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jTFContra;
+    private javax.swing.JTextField jTFContra;
     private javax.swing.JTextField jTFUsuario;
     // End of variables declaration//GEN-END:variables
 }
