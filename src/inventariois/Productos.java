@@ -4,104 +4,22 @@
  */
 package inventariois;
 
-import inventariois.Conexion;
-import inventariois.Conexion;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.HashMap;
-import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter;
-import net.sf.jasperreports.engine.util.JRLoader;
-import net.sf.jasperreports.export.SimpleExporterInput;
-import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
-import net.sf.jasperreports.export.SimpleXlsxReportConfiguration;
-import net.sf.jasperreports.view.JasperViewer;
-
-
 
 /**
  *
  * @author gerso
  */
 public class Productos extends javax.swing.JFrame {
-    
+
     /**
      * Creates new form Productos
      */
     public Productos() {
         initComponents();
-        cargarCategorias(); // Cargar categorías al iniciar
-        cargarUnidadesMedida(); // Cargar unidades de medida al iniciar
-        cargarProductos(); // Cargar productos
     }
-    
-        private void cargarCategorias() {
-            cmbCategoria.removeAllItems(); // Limpiar el ComboBox antes de llenarlo
-            String sql = "SELECT idcategorias, categoria FROM categorias WHERE activo = 1"; // Solo categorías activas
 
-            try (Connection conn = new Conexion().estableceConexion(); PreparedStatement pst = conn.prepareStatement(sql); ResultSet rs = pst.executeQuery()) {
-                while (rs.next()) {
-                    cmbCategoria.addItem(rs.getString("categoria")); // Agregar la categoría al ComboBox
-                }
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Error al cargar categorías: " + e.getMessage());
-            }
-        }
-
-    private void cargarUnidadesMedida() {
-        cmbUnidadMedida.removeAllItems(); // Limpiar el ComboBox antes de llenarlo
-        String sql = "SELECT idunidadesmedida, unidad FROM unidadesmedida WHERE activo = 1"; // Solo unidades activas
-
-        try (Connection conn = new Conexion().estableceConexion(); PreparedStatement pst = conn.prepareStatement(sql); ResultSet rs = pst.executeQuery()) {
-            while (rs.next()) {
-                cmbUnidadMedida.addItem(rs.getString("unidad")); // Agregar la unidad al ComboBox
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error al cargar unidades de medida: " + e.getMessage());
-        }
-    }
-    
-    private void cargarProductos() {
-        DefaultTableModel model = (DefaultTableModel) tblProductos.getModel();
-        model.setRowCount(0);
-        String sql = "SELECT c.idcodigos, c.sku, c.descripcion, c.existencia, c.costounitario, c.marca, c.serial, "
-                   + "cat.categoria, um.unidad "
-                   + "FROM productos c "
-                   + "JOIN categorias cat ON c.categorias_idcategorias = cat.idcategorias "
-                   + "JOIN unidadesmedida um ON c.unidadesmedida_idunidadesmedida = um.idunidadesmedida";
-
-        try (Connection conn = new Conexion().estableceConexion(); PreparedStatement pst = conn.prepareStatement(sql); ResultSet rs = pst.executeQuery()) {
-            while (rs.next()) {
-                Object[] row = { 
-                    rs.getInt("idcodigos"), 
-                    rs.getString("sku"), 
-                    rs.getString("descripcion"), 
-                    rs.getString("marca"),
-                    rs.getString("serial"),
-                    rs.getInt("existencia"), 
-                    rs.getDouble("costounitario"), 
-                    rs.getString("categoria"), // Descripción de la categoría
-                    rs.getString("unidad") // Descripción de la unidad de medida
-                };
-                model.addRow(row);
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error al cargar productos: " + e.getMessage());
-        }
-    }
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -119,502 +37,230 @@ public class Productos extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        txtSKU = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
         txtDescripcion = new javax.swing.JTextField();
-        txtExistencia = new javax.swing.JTextField();
-        txtCosto = new javax.swing.JTextField();
+        txtCantidad = new javax.swing.JTextField();
+        txtPrecio = new javax.swing.JTextField();
         btnAgregar = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblProductos = new javax.swing.JTable();
+        tablaProductos = new javax.swing.JTable();
         cmbCategoria = new javax.swing.JComboBox<>();
-        jLabel7 = new javax.swing.JLabel();
-        cmbUnidadMedida = new javax.swing.JComboBox<>();
-        btnSalir = new javax.swing.JButton();
-        btnReporteProductos = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
-        txtMarca = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        txtSerial = new javax.swing.JTextField();
-        btnModificar = new javax.swing.JButton();
-        btnGenerarReporte = new javax.swing.JButton();
-        btnReporteExistencia = new javax.swing.JButton();
 
         jTextField2.setText("jTextField2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 255));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("PRODUCTOS");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(137, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(168, 168, 168)
                 .addComponent(jLabel1)
-                .addGap(141, 141, 141))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 12, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 0, -1, -1));
+        jLabel2.setText("Nombre Del Producto:");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("SKU:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 53, -1, -1));
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Descripcion:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 88, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel4.setText("Existencia:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 178, -1, -1));
+        jLabel4.setText("Cantidad:");
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel5.setText("Costo:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 216, -1, -1));
+        jLabel5.setText("Precio:");
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setText("Categoria:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 245, -1, -1));
 
-        txtSKU.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtSKU.addActionListener(new java.awt.event.ActionListener() {
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSKUActionPerformed(evt);
+                txtNombreActionPerformed(evt);
             }
         });
-        getContentPane().add(txtSKU, new org.netbeans.lib.awtextra.AbsoluteConstraints(118, 50, 257, -1));
 
-        txtDescripcion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtDescripcion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDescripcionActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(118, 82, 257, -1));
-
-        txtExistencia.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        getContentPane().add(txtExistencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(118, 178, 257, -1));
-
-        txtCosto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        getContentPane().add(txtCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(118, 210, 256, -1));
-
-        btnAgregar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/guardar-carpeta.png"))); // NOI18N
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 120, -1));
 
-        btnEliminar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/desactivado.png"))); // NOI18N
+        btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
+
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(257, 410, -1, -1));
 
-        btnLimpiar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/categoria.png"))); // NOI18N
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimpiarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 455, 125, -1));
 
-        tblProductos.setModel(new javax.swing.table.DefaultTableModel(
+        tablaProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "ID", "SKU", "Descripcion", "Marca", "Serial", "Existencia", "Costo", "Categoria"
+                "ID", "Nombre", "Cantidad", "Precio", "Categoria"
             }
         ));
-        tblProductos.setRowHeight(25);
-        tblProductos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblProductosMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tblProductos);
+        jScrollPane1.setViewportView(tablaProductos);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 6, 783, 488));
-
-        cmbCategoria.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cmbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(cmbCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(118, 242, 256, -1));
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel7.setText("Unidad Medida");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 277, -1, -1));
-
-        cmbUnidadMedida.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cmbUnidadMedida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(cmbUnidadMedida, new org.netbeans.lib.awtextra.AbsoluteConstraints(118, 274, -1, -1));
-
-        btnSalir.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/cancelar-compras.png"))); // NOI18N
-        btnSalir.setText("Salir");
-        btnSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalirActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(257, 455, 114, -1));
-
-        btnReporteProductos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnReporteProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Invoice_1.png"))); // NOI18N
-        btnReporteProductos.setText("Reportes");
-        btnReporteProductos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReporteProductosActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnReporteProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 455, -1, -1));
-
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel8.setText("Marca:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 114, -1, -1));
-
-        txtMarca.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        getContentPane().add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(118, 114, 257, -1));
-
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel9.setText("Serial:");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 146, -1, -1));
-
-        txtSerial.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        getContentPane().add(txtSerial, new org.netbeans.lib.awtextra.AbsoluteConstraints(118, 146, 257, -1));
-
-        btnModificar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Refresh.png"))); // NOI18N
-        btnModificar.setText("Actualizar");
-        btnModificar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnModificarMouseClicked(evt);
-            }
-        });
-        btnModificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModificarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 410, -1, -1));
-
-        btnGenerarReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Downloading Updates.png"))); // NOI18N
-        btnGenerarReporte.setText("Reporte");
-        btnGenerarReporte.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGenerarReporteActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnGenerarReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 360, -1, -1));
-
-        btnReporteExistencia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/How Many Quest_2.png"))); // NOI18N
-        btnReporteExistencia.setText("R.Existencia");
-        btnReporteExistencia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReporteExistenciaActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnReporteExistencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 360, -1, -1));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnAgregar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnActualizar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEliminar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnLimpiar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtNombre)
+                            .addComponent(txtDescripcion)
+                            .addComponent(txtCantidad)
+                            .addComponent(txtPrecio)
+                            .addComponent(cmbCategoria, 0, 198, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(cmbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAgregar)
+                    .addComponent(btnActualizar)
+                    .addComponent(btnEliminar)
+                    .addComponent(btnLimpiar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtSKUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSKUActionPerformed
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtSKUActionPerformed
+    }//GEN-LAST:event_txtNombreActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        String sku = txtSKU.getText();
-        String descripcion = txtDescripcion.getText();
-        int cantidad = Integer.parseInt(txtExistencia.getText());
-        double costo = Double.parseDouble(txtCosto.getText());
-        int categoria = cmbCategoria.getSelectedIndex() + 1; // Asegúrate de que el índice coincida con el ID en la base de datos
-        int unidadMedida = cmbUnidadMedida.getSelectedIndex() + 1; // Asegúrate de que el índice coincida con el ID en la base de datos
-        String marca = txtMarca.getText(); // Obtener el valor de txtMarca
-        String serial = txtSerial.getText(); // Obtener el valor de txtSerial
-        if (sku.isEmpty() || descripcion.isEmpty() || cantidad <= 0 || costo <= 0 || categoria <= 0 || unidadMedida <= 0 || marca.isEmpty() || serial.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos correctamente.");
-            return;
-        }
-        String sql = "INSERT INTO productos (sku, descripcion, unidadesmedida_idunidadesmedida, categorias_idcategorias, costounitario, existencia, marca, serial) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        try (Connection conn = new Conexion().estableceConexion(); PreparedStatement pst = conn.prepareStatement(sql)) {
-            pst.setString(1, sku);
-            pst.setString(2, descripcion);
-            pst.setInt(3, unidadMedida); // Asegúrate de que este sea el ID correcto
-            pst.setInt(4, categoria); // Asegúrate de que este sea el ID correcto
-            pst.setDouble(5, costo);
-            pst.setInt(6, cantidad);
-            pst.setString(7, marca); // Establecer el valor de marca
-            pst.setString(8, serial); // Establecer el valor de serial
-            pst.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Producto agregado correctamente.");
-            cargarProductos();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error al agregar producto: " + e.getMessage());
-        }
-        limpiarCampos();
+        // TODO add your handling code here:
+        
+        DefaultTableModel modelo=(DefaultTableModel) tablaProductos.getModel();
+         modelo.addRow(new Object[]{
+        txtNombre.getText(),
+        txtDescripcion.getText(),
+        txtCantidad.getText(),
+        txtPrecio.getText(),
+        cmbCategoria.getSelectedItem().toString()
+    });
+         limpiarCampos();
+         
+        
     }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        // TODO add your handling code here:
+         int fila = tablaProductos.getSelectedRow();
+        if (fila >= 0) {
+         DefaultTableModel modelo = (DefaultTableModel) tablaProductos.getModel();
+         modelo.setValueAt(txtNombre.getText(), fila, 0);
+         modelo.setValueAt(txtDescripcion.getText(), fila, 1);
+         modelo.setValueAt(txtCantidad.getText(), fila, 2);
+         modelo.setValueAt(txtPrecio.getText(), fila, 3);
+         modelo.setValueAt(cmbCategoria.getSelectedItem().toString(), fila, 4);
+        } else {
+        JOptionPane.showMessageDialog(this, "Seleccione un producto para actualizar.");
+      }
+    }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
-           int filaSeleccionada = tblProductos.getSelectedRow();
-        if (filaSeleccionada < 0) {
+        
+        int fila= tablaProductos.getSelectedRow();
+        if(fila >=0){
+            DefaultTableModel modelo = (DefaultTableModel) tablaProductos.getModel();
+            modelo.removeRow(fila);
+        }else {
             JOptionPane.showMessageDialog(this, "Seleccione un producto para eliminar.");
-            return;
         }
-        
-        int confirmacion = JOptionPane.showConfirmDialog(this, "¿Estás seguro de eliminar este producto?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
-        if (confirmacion != JOptionPane.YES_OPTION) {
-            return;
-        }
-
-        int id = (int) tblProductos.getValueAt(filaSeleccionada, 0);
-        String sql = "DELETE FROM productos WHERE idcodigos=?";
-        try (Connection conn = new Conexion().estableceConexion(); PreparedStatement pst = conn.prepareStatement(sql)) {
-            pst.setInt(1, id);
-            pst.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Producto eliminado correctamente.");
-            cargarProductos();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error al eliminar producto: " + e.getMessage());
-        }
-        
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         // TODO add your handling code here:
         limpiarCampos();
     }//GEN-LAST:event_btnLimpiarActionPerformed
-
-    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_btnSalirActionPerformed
-
-    private void btnReporteProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteProductosActionPerformed
-        // TODO add your handling code here:
-        try {
-             InputStream jasperStream = getClass().getResourceAsStream("/Reportes/ReporteProductoss.jasper");
-    
-     
-        if (jasperStream == null) {
-             throw new RuntimeException("No se encontro el archivo ReporteProductos.jasper en el classpath.");
-    }
-
-          JasperReport reporte = (JasperReport) JRLoader.loadObject(jasperStream);
-          Connection conn = new Conexion().estableceConexion();
-
-          JasperPrint print = JasperFillManager.fillReport(reporte, null, conn);
-          JasperViewer viewer = new JasperViewer(print, false);
-          viewer.setTitle("Reporte completo de productos");
-          viewer.setVisible(true);
-        } catch (Exception e) {
-            e.printStackTrace();
-          JOptionPane.showMessageDialog(this, "Error al mostrar el reporte: " + e.getMessage());
+private void limpiarCampos() {
+    txtNombre.setText("");
+    txtDescripcion.setText("");
+    txtCantidad.setText("");
+    txtPrecio.setText("");
+    cmbCategoria.setSelectedIndex(0); // Reinicia el ComboBox a la primera opción
 }
-    }//GEN-LAST:event_btnReporteProductosActionPerformed
-
-    private void txtDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescripcionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDescripcionActionPerformed
-
-    private void tblProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductosMouseClicked
-        int filaSeleccionada = tblProductos.getSelectedRow();
-        if (filaSeleccionada >= 0) {
-            txtSKU.setText(tblProductos.getValueAt(filaSeleccionada, 1).toString());
-            txtDescripcion.setText(tblProductos.getValueAt(filaSeleccionada, 2).toString());
-            txtMarca.setText(tblProductos.getValueAt(filaSeleccionada, 3).toString()); // Asegúrate de que este índice sea correcto
-            txtSerial.setText(tblProductos.getValueAt(filaSeleccionada, 4).toString()); // Asegúrate de que este índice sea correcto
-            txtExistencia.setText(tblProductos.getValueAt(filaSeleccionada, 5).toString());
-            txtCosto.setText(tblProductos.getValueAt(filaSeleccionada, 6).toString());
-            // Cargar la categoría
-            String categoriaDescripcion = tblProductos.getValueAt(filaSeleccionada, 7).toString();
-            cmbCategoria.setSelectedItem(categoriaDescripcion); // Seleccionar la descripción de la categoría
-            // Cargar la unidad de medida
-            String unidadDescripcion = tblProductos.getValueAt(filaSeleccionada, 8).toString();
-            cmbUnidadMedida.setSelectedItem(unidadDescripcion); // Seleccionar la descripción de la unidad de medida
-        }
-    }//GEN-LAST:event_tblProductosMouseClicked
-
-    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnModificarActionPerformed
-
-    private void btnModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarMouseClicked
-        int filaSeleccionada = tblProductos.getSelectedRow();
-        if (filaSeleccionada < 0) {
-            JOptionPane.showMessageDialog(this, "Seleccione un producto para modificar.");
-            return;
-        }
-        int id = (int) tblProductos.getValueAt(filaSeleccionada, 0); // Obtener el ID del producto seleccionado
-        String sku = txtSKU.getText();
-        String descripcion = txtDescripcion.getText();
-        int cantidad = Integer.parseInt(txtExistencia.getText());
-        double costo = Double.parseDouble(txtCosto.getText());
-        int categoria = cmbCategoria.getSelectedIndex() + 1; // Asegúrate de que el índice coincida con el ID en la base de datos
-        int unidadMedida = cmbUnidadMedida.getSelectedIndex() + 1; // Asegúrate de que el índice coincida con el ID en la base de datos
-        String marca = txtMarca.getText(); // Obtener el valor de txtMarca
-        String serial = txtSerial.getText(); // Obtener el valor de txtSerial
-        if (sku.isEmpty() || descripcion.isEmpty() || cantidad <= 0 || costo <= 0 || categoria <= 0 || unidadMedida <= 0 || marca.isEmpty() || serial.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos correctamente.");
-            return;
-        }
-        String sql = "UPDATE productos SET sku=?, descripcion=?, unidadesmedida_idunidadesmedida=?, categorias_idcategorias=?, costounitario=?, existencia=?, marca=?, serial=? WHERE idcodigos=?";
-        try (Connection conn = new Conexion().estableceConexion(); PreparedStatement pst = conn.prepareStatement(sql)) {
-            pst.setString(1, sku);
-            pst.setString(2, descripcion);
-            pst.setInt(3, unidadMedida); // Asegúrate de que este sea el ID correcto
-            pst.setInt(4, categoria); // Asegúrate de que este sea el ID correcto
-            pst.setDouble(5, costo);
-            pst.setInt(6, cantidad);
-            pst.setString(7, marca); // Establecer el valor de marca
-            pst.setString(8, serial); // Establecer el valor de serial
-            pst.setInt(9, id); // Establecer el ID del producto a actualizar
-            pst.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Producto actualizado correctamente.");
-            cargarProductos(); // Recargar la lista de productos
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error al actualizar producto: " + e.getMessage());
-        }
-        limpiarCampos();
-    }//GEN-LAST:event_btnModificarMouseClicked
-
-    private void btnGenerarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarReporteActionPerformed
-        // TODO add your handling code here:
-        Object[] opciones = {"PDF", "Excel"};
-        int opcion = JOptionPane.showOptionDialog(null,
-            "¿Desea descargar el reporte en PDF o Excel?",
-            "Descargar Reporte",
-            JOptionPane.DEFAULT_OPTION,
-            JOptionPane.QUESTION_MESSAGE,
-            null,
-            opciones,
-            opciones[0]);
-
-        if (opcion == 0) {
-            generarReportePDF();  
-        } else if (opcion == 1) {
-            generarReporteExcel(); 
-        }
-    }//GEN-LAST:event_btnGenerarReporteActionPerformed
-
-    private void btnReporteExistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteExistenciaActionPerformed
-        // TODO add your handling code here:
-        try {
-            
-            String input = JOptionPane.showInputDialog(null,
-                    "Ingrese la cantidad máxima de productos en existencia que desea consultar:",
-                    "Filtrar por existencia", JOptionPane.QUESTION_MESSAGE);
-            
-            if (input != null && !input.isEmpty()) {
-                int cantidad = Integer.parseInt(input);
-                
-               InputStream jasperStream = getClass().getResourceAsStream("/Reportes/ReporteExistenciaProductos.jasper");
-                
-                Map<String, Object> parametros = new HashMap<>();
-                parametros.put("minExistencia", cantidad);  
-               
-                Connection conn = new Conexion().estableceConexion(); 
-                
-                JasperPrint print = JasperFillManager.fillReport(jasperStream, parametros, conn);
-                
-                JasperViewer viewer = new JasperViewer(print, false);
-                viewer.setTitle("Reporte de Productos por Existencia");
-                viewer.setVisible(true);
-            }
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "Ingrese un numero valido.");
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error al generar el reporte: " + ex.getMessage());
-        }
-
-    }//GEN-LAST:event_btnReporteExistenciaActionPerformed
-    
-    public void generarReportePDF() {
-    try {
-        Connection conn = new Conexion().estableceConexion();
-        InputStream rutaReporte = getClass().getResourceAsStream("/Reportes/ReporteProductoss.jasper");
-        JasperReport reporte = (JasperReport) JRLoader.loadObject(rutaReporte);
-
-        JasperPrint print = JasperFillManager.fillReport(reporte, null, conn);
-
-        String rutaSalida = "reporteProductos.pdf";
-        JasperExportManager.exportReportToPdfFile(print, rutaSalida);
-
-        JOptionPane.showMessageDialog(null, "Reporte PDF generado correctamente en: " + rutaSalida);
-
-    } catch (Exception ex) {
-        ex.printStackTrace();
-        JOptionPane.showMessageDialog(null, "Error al generar el reporte PDF.");
-    }
-}
-    
-    public void generarReporteExcel() {
-    try {
-        Connection conn = new Conexion().estableceConexion();
-        InputStream rutaReporte = getClass().getResourceAsStream("/Reportes/ReporteProductoss.jasper");
-        JasperReport reporte = (JasperReport) JRLoader.loadObject(rutaReporte);
-
-        JasperPrint print = JasperFillManager.fillReport(reporte, null, conn);
-
-        JRXlsxExporter exporter = new JRXlsxExporter();
-        exporter.setExporterInput(new SimpleExporterInput(print));
-        exporter.setExporterOutput(new SimpleOutputStreamExporterOutput("reporteProductos.xlsx"));
-
-        SimpleXlsxReportConfiguration config = new SimpleXlsxReportConfiguration();
-        config.setOnePagePerSheet(false);
-        config.setDetectCellType(true);
-        config.setCollapseRowSpan(false);
-
-        exporter.setConfiguration(config);
-        exporter.exportReport();
-
-        JOptionPane.showMessageDialog(null, "Reporte Excel generado correctamente en: reporteProductos.xlsx");
-
-    } catch (Exception ex) {
-        ex.printStackTrace();
-        JOptionPane.showMessageDialog(null, "Error al generar el reporte Excel.");
-    }
-}
-    
-    private void limpiarCampos() {
-        txtSKU.setText("");
-        txtDescripcion.setText("");
-        txtExistencia.setText("");
-        txtCosto.setText("");
-        txtMarca.setText("");
-        txtSerial.setText("");
-        cmbCategoria.setSelectedIndex(0);
-        cmbUnidadMedida.setSelectedIndex(0);// Reinicia el ComboBox a la primera opción
-    }
     
     /**
      * @param args the command line arguments
@@ -643,8 +289,6 @@ public class Productos extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -655,34 +299,24 @@ public class Productos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnEliminar;
-    private javax.swing.JButton btnGenerarReporte;
     private javax.swing.JButton btnLimpiar;
-    private javax.swing.JButton btnModificar;
-    private javax.swing.JButton btnReporteExistencia;
-    private javax.swing.JButton btnReporteProductos;
-    private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox<String> cmbCategoria;
-    private javax.swing.JComboBox<String> cmbUnidadMedida;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTable tblProductos;
-    private javax.swing.JTextField txtCosto;
+    private javax.swing.JTable tablaProductos;
+    private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtDescripcion;
-    private javax.swing.JTextField txtExistencia;
-    private javax.swing.JTextField txtMarca;
-    private javax.swing.JTextField txtSKU;
-    private javax.swing.JTextField txtSerial;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables
 }
