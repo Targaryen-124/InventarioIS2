@@ -5,7 +5,6 @@
 package inventariois;
 
 import javax.swing.JFrame;
-import javax.swing.*;
 
 /**
  *
@@ -13,15 +12,11 @@ import javax.swing.*;
  */
 public class Principal extends javax.swing.JFrame {
 
-
     /**
      * Creates new form Principal
      */
- 
-     public Principal(String rolUsuario) {
-      
+    public Principal() {
         initComponents();
-        configurarRol(rolUsuario);
     }
 
     /**
@@ -34,15 +29,12 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuBar1 = new javax.swing.JMenuBar();
-        menuUsuarios = new javax.swing.JMenu();
-        menuUM = new javax.swing.JMenu();
-        menuCategoria = new javax.swing.JMenu();
-        menuProductos = new javax.swing.JMenu();
-        menuTransacciones = new javax.swing.JMenu();
-        menuConsultas = new javax.swing.JMenu();
-        menuVentas = new javax.swing.JMenu();
-        MenuClientes = new javax.swing.JMenu();
-        menuFacturas = new javax.swing.JMenu();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
+        jMenu5 = new javax.swing.JMenu();
+        jMenu6 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -50,176 +42,149 @@ public class Principal extends javax.swing.JFrame {
                 formWindowOpened(evt);
             }
         });
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        menuUsuarios.setText("Usuarios");
-        menuUsuarios.addMenuListener(new javax.swing.event.MenuListener() {
+        jMenu1.setText("Usuarios");
+        jMenu1.addMenuListener(new javax.swing.event.MenuListener() {
             public void menuCanceled(javax.swing.event.MenuEvent evt) {
             }
             public void menuDeselected(javax.swing.event.MenuEvent evt) {
             }
             public void menuSelected(javax.swing.event.MenuEvent evt) {
-                menuUsuariosMenuSelected(evt);
+                jMenu1MenuSelected(evt);
             }
         });
-        jMenuBar1.add(menuUsuarios);
+        jMenuBar1.add(jMenu1);
 
-        menuUM.setText("UM");
-        menuUM.addMenuListener(new javax.swing.event.MenuListener() {
+        jMenu2.setText("UM");
+        jMenu2.addMenuListener(new javax.swing.event.MenuListener() {
             public void menuCanceled(javax.swing.event.MenuEvent evt) {
             }
             public void menuDeselected(javax.swing.event.MenuEvent evt) {
             }
             public void menuSelected(javax.swing.event.MenuEvent evt) {
-                menuUMMenuSelected(evt);
+                jMenu2MenuSelected(evt);
             }
         });
-        jMenuBar1.add(menuUM);
+        jMenuBar1.add(jMenu2);
 
-        menuCategoria.setText("Categorias");
-        menuCategoria.addMenuListener(new javax.swing.event.MenuListener() {
+        jMenu3.setText("Categorias");
+        jMenu3.addMenuListener(new javax.swing.event.MenuListener() {
             public void menuCanceled(javax.swing.event.MenuEvent evt) {
             }
             public void menuDeselected(javax.swing.event.MenuEvent evt) {
             }
             public void menuSelected(javax.swing.event.MenuEvent evt) {
-                menuCategoriaMenuSelected(evt);
+                jMenu3MenuSelected(evt);
             }
         });
-        jMenuBar1.add(menuCategoria);
+        jMenuBar1.add(jMenu3);
 
-        menuProductos.setText("Productos");
-        menuProductos.addMenuListener(new javax.swing.event.MenuListener() {
+        jMenu4.setText("Productos");
+        jMenu4.addMenuListener(new javax.swing.event.MenuListener() {
             public void menuCanceled(javax.swing.event.MenuEvent evt) {
             }
             public void menuDeselected(javax.swing.event.MenuEvent evt) {
             }
             public void menuSelected(javax.swing.event.MenuEvent evt) {
-                menuProductosMenuSelected(evt);
+                jMenu4MenuSelected(evt);
             }
         });
-        jMenuBar1.add(menuProductos);
+        jMenuBar1.add(jMenu4);
 
-        menuTransacciones.setText("Transacciones");
-        menuTransacciones.addMenuListener(new javax.swing.event.MenuListener() {
+        jMenu5.setText("Transacciones");
+        jMenu5.addMenuListener(new javax.swing.event.MenuListener() {
             public void menuCanceled(javax.swing.event.MenuEvent evt) {
             }
             public void menuDeselected(javax.swing.event.MenuEvent evt) {
             }
             public void menuSelected(javax.swing.event.MenuEvent evt) {
-                menuTransaccionesMenuSelected(evt);
+                jMenu5MenuSelected(evt);
             }
         });
-        jMenuBar1.add(menuTransacciones);
+        jMenuBar1.add(jMenu5);
 
-        menuConsultas.setText("Consultas");
-        menuConsultas.addMenuListener(new javax.swing.event.MenuListener() {
+        jMenu6.setText("Consultas");
+        jMenu6.addMenuListener(new javax.swing.event.MenuListener() {
             public void menuCanceled(javax.swing.event.MenuEvent evt) {
             }
             public void menuDeselected(javax.swing.event.MenuEvent evt) {
             }
             public void menuSelected(javax.swing.event.MenuEvent evt) {
-                menuConsultasMenuSelected(evt);
+                jMenu6MenuSelected(evt);
             }
         });
-        jMenuBar1.add(menuConsultas);
-
-        menuVentas.setText("Ventas");
-        menuVentas.addMenuListener(new javax.swing.event.MenuListener() {
-            public void menuCanceled(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuDeselected(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuSelected(javax.swing.event.MenuEvent evt) {
-                menuVentasMenuSelected(evt);
-            }
-        });
-        jMenuBar1.add(menuVentas);
-
-        MenuClientes.setText("Clientes");
-        MenuClientes.addMenuListener(new javax.swing.event.MenuListener() {
-            public void menuCanceled(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuDeselected(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuSelected(javax.swing.event.MenuEvent evt) {
-                MenuClientesMenuSelected(evt);
-            }
-        });
-        jMenuBar1.add(MenuClientes);
-
-        menuFacturas.setText("Facturas");
-        menuFacturas.addMenuListener(new javax.swing.event.MenuListener() {
-            public void menuCanceled(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuDeselected(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuSelected(javax.swing.event.MenuEvent evt) {
-                menuFacturasMenuSelected(evt);
-            }
-        });
-        jMenuBar1.add(menuFacturas);
+        jMenuBar1.add(jMenu6);
 
         setJMenuBar(jMenuBar1);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 906, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 604, Short.MAX_VALUE)
+        );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-
-    private void menuUsuariosMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_menuUsuariosMenuSelected
+    private void jMenu1MenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jMenu1MenuSelected
         Usuarios usuarios = new Usuarios();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 usuarios.setVisible(true);
             }
         });
-    }//GEN-LAST:event_menuUsuariosMenuSelected
+    }//GEN-LAST:event_jMenu1MenuSelected
 
-    private void menuUMMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_menuUMMenuSelected
+    private void jMenu2MenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jMenu2MenuSelected
         Unidades unidades = new Unidades();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 unidades.setVisible(true);
             }
         });
-    }//GEN-LAST:event_menuUMMenuSelected
+    }//GEN-LAST:event_jMenu2MenuSelected
 
-    private void menuCategoriaMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_menuCategoriaMenuSelected
+    private void jMenu3MenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jMenu3MenuSelected
         Categorias categorias = new Categorias();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 categorias.setVisible(true);
             }
         });
-    }//GEN-LAST:event_menuCategoriaMenuSelected
+    }//GEN-LAST:event_jMenu3MenuSelected
 
-    private void menuProductosMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_menuProductosMenuSelected
+    private void jMenu4MenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jMenu4MenuSelected
         Productos producto = new Productos();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 producto.setVisible(true);
             }
         });
-    }//GEN-LAST:event_menuProductosMenuSelected
+    }//GEN-LAST:event_jMenu4MenuSelected
 
-    private void menuTransaccionesMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_menuTransaccionesMenuSelected
+    private void jMenu5MenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jMenu5MenuSelected
         Transacciones transacciones = new Transacciones();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 transacciones.setVisible(true);
             }
         });
-    }//GEN-LAST:event_menuTransaccionesMenuSelected
+    }//GEN-LAST:event_jMenu5MenuSelected
 
-    private void menuConsultasMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_menuConsultasMenuSelected
+    private void jMenu6MenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jMenu6MenuSelected
         Consulta consulta = new Consulta();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 consulta.setVisible(true);
             }
         });
-    }//GEN-LAST:event_menuConsultasMenuSelected
+    }//GEN-LAST:event_jMenu6MenuSelected
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         Imagen imagen = new Imagen();
@@ -230,61 +195,6 @@ public class Principal extends javax.swing.JFrame {
         });
     }//GEN-LAST:event_formWindowOpened
 
-    private void menuVentasMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_menuVentasMenuSelected
-         // TODO add your handling code here:
-         Ventas ventas = new Ventas();
-          java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                ventas.setVisible(true);
-            }
-        });
-    }//GEN-LAST:event_menuVentasMenuSelected
-
-    private void MenuClientesMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_MenuClientesMenuSelected
-        // TODO add your handling code here:
-        Clientes clientePanel = new Clientes();
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                clientePanel.setVisible(true);
-            }
-        });
-    }//GEN-LAST:event_MenuClientesMenuSelected
-
-    private void menuFacturasMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_menuFacturasMenuSelected
-        // TODO add your handling code here:
-        Factura facturaPanel = new Factura();
-        java.awt.EventQueue.invokeLater(new Runnable(){
-            public void run() {
-                facturaPanel.setVisible(true);
-            }
-            
-        });
-        
-    }//GEN-LAST:event_menuFacturasMenuSelected
-  
-    public void configurarRol(String rol) {
-       if (rol.equalsIgnoreCase("Admin") || rol.equalsIgnoreCase("Supervisor")) {
-           MenuClientes.setEnabled(true);
-           menuVentas.setEnabled(true);
-           menuCategoria.setEnabled(true);
-           menuConsultas.setEnabled(true);
-           menuProductos.setEnabled(true);
-           menuTransacciones.setEnabled(true);
-           menuUM.setEnabled(true);
-           menuUsuarios.setEnabled(true);
-       
-        
-    } else if (rol.equalsIgnoreCase("Cajero")) {
-        MenuClientes.setEnabled(false);
-        menuVentas.setEnabled(true);
-        menuCategoria.setEnabled(false);
-        menuConsultas.setEnabled(false);
-        menuProductos.setEnabled(false);
-        menuTransacciones.setEnabled(false);
-        menuUM.setEnabled(false);
-        menuUsuarios.setEnabled(false);
-    }
-}
     
     /**
      * @param args the command line arguments
@@ -316,8 +226,7 @@ public class Principal extends javax.swing.JFrame {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                String rolSimulado = "Cajero";
-                Principal principal = new Principal(rolSimulado);
+                Principal principal = new Principal();
                 principal.setExtendedState(JFrame.MAXIMIZED_BOTH);
                 principal.setVisible(true);
             }
@@ -325,15 +234,12 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu MenuClientes;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenu menuCategoria;
-    private javax.swing.JMenu menuConsultas;
-    private javax.swing.JMenu menuFacturas;
-    private javax.swing.JMenu menuProductos;
-    private javax.swing.JMenu menuTransacciones;
-    private javax.swing.JMenu menuUM;
-    private javax.swing.JMenu menuUsuarios;
-    private javax.swing.JMenu menuVentas;
     // End of variables declaration//GEN-END:variables
 }
