@@ -4,22 +4,6 @@
  */
 package inventariois;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-import correo.EnviarCorreo;
-import inventariois.Conexion;
-import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.util.JRLoader;
-import net.sf.jasperreports.view.JasperViewer;
 /**
  *
  * @author Yohana Padilla
@@ -31,95 +15,7 @@ public class Ventas extends javax.swing.JFrame {
      */
     public Ventas() {
         initComponents();
-        cargarClientes();
-        cargarProductos();
-        generarID();
     }
-    
-    private void generarID() {
-        try (Connection conn = new Conexion().estableceConexion();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS max_id FROM ventasencabezado")) {
-            
-            if (rs.next()) {
-                int maxId = rs.getInt("max_id");
-                jTFCodigo.setText(String.valueOf(maxId + 1)); // Incrementar el ID
-                txtCantidad.setText("");
-                txtProducto.setText("");
-                jCBSKU.setSelectedIndex(-1);
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error al generar ID: " + e.getMessage());
-        }
-    }
-    
-    private void cargarClientes() {
-        jCBCid.removeAllItems(); // Limpiar el ComboBox antes de llenarlo
-        String sql = "SELECT id, identidad FROM clientes";
-
-        try (Connection conn = new Conexion().estableceConexion(); PreparedStatement pst = conn.prepareStatement(sql); ResultSet rs = pst.executeQuery()) {
-            while (rs.next()) {
-                jCBCid.addItem(rs.getString("identidad")); // Agregar la unidad al ComboBox
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error al cargar clientes: " + e.getMessage());
-        }
-    }
-    
-    private void cargarProductos() {
-        jCBSKU.removeAllItems(); // Limpiar el ComboBox antes de llenarlo
-        String sql = "SELECT idcodigos, sku, descripcion FROM productos"; // Asegúrate de que la consulta incluya la categoría
-        try (Connection conn = new Conexion().estableceConexion(); PreparedStatement pst = conn.prepareStatement(sql); ResultSet rs = pst.executeQuery()) {
-            while (rs.next()) {
-                String descripcion = rs.getString("descripcion");
-                String sku = rs.getString("sku");
-                jCBSKU.addItem(descripcion + " - " + sku); // Agregar la unidad al ComboBox
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error al cargar productos: " + e.getMessage());
-        }
-    }
-    
-    private void calcularSubtotal() {
-        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-        double subtotal = 0.0;
-
-        // Iterate through the table rows to calculate the subtotal
-        for (int i = 0; i < model.getRowCount(); i++) {
-            subtotal += (double) model.getValueAt(i, 4); // Assuming the total is in the 5th column (index 4)
-        }
-
-        // Update the subtotal label
-        jLblSubTotal.setText("L. " + String.format("%.2f", subtotal));
-
-        // Calculate and update the tax
-        double impuesto = subtotal * 0.15;
-        jLblImpuesto.setText("L. " + String.format("%.2f", impuesto));
-
-        // Calculate the total to pay
-        double totalAPagar = subtotal + impuesto; // Total before discount
-
-        // Get the points from jLblpuntos
-        String puntosText = jLblpuntos.getText().replace("Puntos: ", ""); // Extract the number of points
-        int puntos = 0;
-        try {
-            puntos = Integer.parseInt(puntosText);
-        } catch (NumberFormatException e) {
-            // Handle the case where points are not a valid number
-            puntos = 0;
-        }
-
-        // Calculate the discount based on points
-        double descuento = puntos * 0.1;
-        jTFDescuento1.setText(String.format("%.2f", descuento)); // Update the discount field
-
-        // Subtract the discount from the total to pay
-        totalAPagar -= descuento;
-
-        // Update the total to pay label
-        jLabeTotalAPagar2.setText("L. " + String.format("%.2f", totalAPagar));
-    }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -134,36 +30,31 @@ public class Ventas extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        txtCategoria = new javax.swing.JTextField();
         txtCantidad = new javax.swing.JTextField();
         btnEliminar = new javax.swing.JButton();
-        btnAgregar = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jTFCodigo = new javax.swing.JTextField();
         jCBCid = new javax.swing.JComboBox<>();
         jCBSKU = new javax.swing.JComboBox<>();
         txtProducto = new javax.swing.JTextField();
-        jLblpuntos = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        txtPago = new javax.swing.JLabel();
-        jLabelPuntos = new javax.swing.JLabel();
+        btnFinalizarCompra = new javax.swing.JButton();
+        jLabeTotalAPagar = new javax.swing.JLabel();
+        txtPago = new javax.swing.JTextField();
+        jLabelCambio = new javax.swing.JLabel();
         btnCalcular = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         btnImprimirFactura = new javax.swing.JButton();
-        jLblImpuesto = new javax.swing.JLabel();
-        jLabeTotalAPagar3 = new javax.swing.JLabel();
-        jLblSubTotal = new javax.swing.JLabel();
-        jTFDescuento1 = new javax.swing.JTextField();
-        jTFdPago = new javax.swing.JTextField();
-        jLabeTotalAPagar2 = new javax.swing.JLabel();
-        jLabelCambio1 = new javax.swing.JLabel();
-        btnActualizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos Generales"));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -180,9 +71,22 @@ public class Ventas extends javax.swing.JFrame {
         jLabel3.setText("Cantidad:");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel4.setText("Categoria:");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
+
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("Cliente ID:");
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
+
+        txtCategoria.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtCategoria.setEnabled(false);
+        txtCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCategoriaActionPerformed(evt);
+            }
+        });
+        jPanel2.add(txtCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 340, -1));
 
         txtCantidad.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtCantidad.addActionListener(new java.awt.event.ActionListener() {
@@ -195,28 +99,32 @@ public class Ventas extends javax.swing.JFrame {
         btnEliminar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/desactivado.png"))); // NOI18N
         btnEliminar.setText("Eliminar");
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
-            }
-        });
         jPanel2.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, -1, 40));
 
-        btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Edit.png"))); // NOI18N
-        btnAgregar.setText("Agregar");
-        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+        btnActualizar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Refresh.png"))); // NOI18N
+        btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarActionPerformed(evt);
+                btnActualizarActionPerformed(evt);
             }
         });
-        jPanel2.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, -1, 40));
+        jPanel2.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 200, -1, 40));
+
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Edit.png"))); // NOI18N
+        btnGuardar.setText("Agregar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, -1, 40));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setText("FACTURA # ");
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 10, -1, -1));
 
-        jTFCodigo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jTFCodigo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTFCodigo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTFCodigo.setEnabled(false);
         jTFCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -227,23 +135,11 @@ public class Ventas extends javax.swing.JFrame {
 
         jCBCid.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jCBCid.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jCBCid.setSelectedIndex(-1);
-        jCBCid.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCBCidActionPerformed(evt);
-            }
-        });
         jPanel2.add(jCBCid, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 200, -1));
 
         jCBSKU.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jCBSKU.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jCBSKU.setSelectedIndex(-1);
-        jCBSKU.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCBSKUActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jCBSKU, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 410, -1));
+        jPanel2.add(jCBSKU, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 200, -1));
 
         txtProducto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtProducto.setEnabled(false);
@@ -252,14 +148,7 @@ public class Ventas extends javax.swing.JFrame {
                 txtProductoActionPerformed(evt);
             }
         });
-        jPanel2.add(txtProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 410, -1));
-
-        jLblpuntos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLblpuntos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLblpuntos.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        jPanel2.add(jLblpuntos, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 30, 120, 30));
-
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 44, 704, 252));
+        jPanel2.add(txtProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 340, -1));
 
         jPanel4.setBackground(new java.awt.Color(255, 204, 255));
 
@@ -273,7 +162,7 @@ public class Ventas extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(432, 432, 432)
                 .addComponent(jLabel7)
-                .addContainerGap(447, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -282,11 +171,12 @@ public class Ventas extends javax.swing.JFrame {
                 .addGap(0, 12, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1016, -1));
-
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
                 "SKU", "Descripcion", "Cantidad", "Precio", "Total"
@@ -302,14 +192,23 @@ public class Ventas extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable2);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 302, 704, 275));
+        btnFinalizarCompra.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnFinalizarCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Checkout.png"))); // NOI18N
+        btnFinalizarCompra.setText("Finalizar compra");
+        btnFinalizarCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFinalizarCompraActionPerformed(evt);
+            }
+        });
+
+        jLabeTotalAPagar.setText("L.");
+        jLabeTotalAPagar.setBorder(javax.swing.BorderFactory.createTitledBorder("Total a Pagar"));
 
         txtPago.setText("L.");
         txtPago.setBorder(javax.swing.BorderFactory.createTitledBorder("Pago"));
-        getContentPane().add(txtPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 310, 200, 50));
 
-        jLabelPuntos.setBorder(javax.swing.BorderFactory.createTitledBorder("Puntos Ganados"));
-        getContentPane().add(jLabelPuntos, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 450, 200, 50));
+        jLabelCambio.setText("L.");
+        jLabelCambio.setBorder(javax.swing.BorderFactory.createTitledBorder("Cambio"));
 
         btnCalcular.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnCalcular.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Estimate.png"))); // NOI18N
@@ -319,7 +218,6 @@ public class Ventas extends javax.swing.JFrame {
                 btnCalcularActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCalcular, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 360, 130, 30));
 
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Export_2.png"))); // NOI18N
         btnSalir.setText("Salir");
@@ -328,182 +226,100 @@ public class Ventas extends javax.swing.JFrame {
                 btnSalirActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 520, 102, -1));
 
         btnImprimirFactura.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnImprimirFactura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Invoice_3.png"))); // NOI18N
         btnImprimirFactura.setText("Imprimir Factura");
-        btnImprimirFactura.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnImprimirFacturaActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnImprimirFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 520, 180, 40));
 
-        jLblImpuesto.setText("L.");
-        jLblImpuesto.setBorder(javax.swing.BorderFactory.createTitledBorder("Impuesto"));
-        getContentPane().add(jLblImpuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 110, 200, 50));
-
-        jLabeTotalAPagar3.setText("L.");
-        jLabeTotalAPagar3.setBorder(javax.swing.BorderFactory.createTitledBorder("Descuento"));
-        getContentPane().add(jLabeTotalAPagar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 170, 200, 50));
-
-        jLblSubTotal.setText("L.");
-        jLblSubTotal.setBorder(javax.swing.BorderFactory.createTitledBorder("Subtotal"));
-        getContentPane().add(jLblSubTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 50, 200, 50));
-        getContentPane().add(jTFDescuento1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 180, 120, 30));
-
-        jTFdPago.setToolTipText("");
-        getContentPane().add(jTFdPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 320, 120, 30));
-
-        jLabeTotalAPagar2.setText("L.");
-        jLabeTotalAPagar2.setBorder(javax.swing.BorderFactory.createTitledBorder("Total a Pagar"));
-        getContentPane().add(jLabeTotalAPagar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 250, 200, 50));
-
-        jLabelCambio1.setText("L.");
-        jLabelCambio1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cambio"));
-        getContentPane().add(jLabelCambio1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 390, 200, 50));
-
-        btnActualizar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Refresh.png"))); // NOI18N
-        btnActualizar.setText("Actualizar");
-        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnActualizarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 220, -1, 30));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 704, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnImprimirFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabeTotalAPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabelCambio, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addContainerGap())
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnFinalizarCompra, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnCalcular, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap())))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtPago, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnFinalizarCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabeTotalAPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtPago, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabelCambio, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCalcular, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnImprimirFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSalir))
+                        .addGap(15, 15, 15))))
+        );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    
+    private void txtCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCategoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCategoriaActionPerformed
+
     private void txtCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCantidadActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        // Recalculate the subtotal, tax, and total to pay
-        //calcularSubtotal(); // This will update subtotal, tax, and discount
-        // Get the current subtotal and tax from the labels
-        double subtotal = Double.parseDouble(jLblSubTotal.getText().replace("L. ", ""));
-        double impuesto = Double.parseDouble(jLblImpuesto.getText().replace("L. ", ""));
-
-        // Get the discount from jTFDescuento1
-        double descuento = 0.0;
-        try {
-            descuento = Double.parseDouble(jTFDescuento1.getText());
-        } catch (NumberFormatException e) {
-            // Handle the case where the discount is not a valid number
-            descuento = 0.0;
-        }
-
-        // Get the current points for the selected client
-        String selectedClient = (String) jCBCid.getSelectedItem();
-        int puntosActuales = 0; // Variable to hold current points
-        String sqlClientId = "SELECT puntos FROM clientes WHERE identidad = ?";
-        try (Connection conn = new Conexion().estableceConexion(); 
-             PreparedStatement pst = conn.prepareStatement(sqlClientId)) {
-            pst.setString(1, selectedClient);
-            ResultSet rs = pst.executeQuery();
-            if (rs.next()) {
-                puntosActuales = rs.getInt("puntos"); // Get current points
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error al obtener los puntos del cliente: " + e.getMessage());
-            return;
-        }
-
-        // Calculate the maximum allowable discount (10% of current points)
-        double maxDescuentoPermitido = puntosActuales * 0.1;
-
-        // Validate that the discount does not exceed the maximum allowable discount
-        if (descuento > maxDescuentoPermitido) {
-            JOptionPane.showMessageDialog(this, "El descuento no puede ser mayor a " + String.format("%.2f", maxDescuentoPermitido) + " (10% de los puntos disponibles).");
-            jTFDescuento1.setText(String.format("%.2f", maxDescuentoPermitido)); // Update the discount field to the maximum allowed
-            descuento = maxDescuentoPermitido; // Set descuento to the maximum allowed for further calculations
-        }
-
-        // Calculate the total to pay
-        double totalAPagar = subtotal + impuesto - descuento;
-        // Update the total to pay label
-        jLabeTotalAPagar2.setText("L " + String.format("%.2f", totalAPagar)); 
+        // TODO add your handling code here:
     }//GEN-LAST:event_btnActualizarActionPerformed
 
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        // Obtener el SKU y la descripción del producto seleccionado
-        String selectedItem = (String) jCBSKU.getSelectedItem();
-        if (selectedItem != null) {
-            String[] parts = selectedItem.split(" - ");
-            String descripcion = parts[0]; // Descripción
-            String sku = parts[1]; // SKU
-            // Obtener la cantidad
-            int cantidad;
-            try {
-                cantidad = Integer.parseInt(txtCantidad.getText());
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "Por favor, ingrese una cantidad válida.");
-                return;
-            }
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
-            // Obtener el precio del producto desde la base de datos
-            double precio = 0.0;
-            String sql = "SELECT costounitario FROM productos WHERE sku = ?";
-            try (Connection conn = new Conexion().estableceConexion(); 
-                 PreparedStatement pst = conn.prepareStatement(sql)) {
-                pst.setString(1, sku);
-                ResultSet rs = pst.executeQuery();
-                if (rs.next()) {
-                    precio = rs.getDouble("costounitario");
-                }
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Error al obtener el precio: " + e.getMessage());
-                return;
-            }
-
-            // Calcular el total
-            double total = cantidad * precio;
-            // Agregar los datos a la tabla
-            DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-            model.insertRow(0, new Object[]{sku, descripcion, cantidad, precio, total}); // Insertar en la primera posición
-            // Limpiar los campos después de agregar
-            txtCantidad.setText("");
-            txtProducto.setText("");
-            jCBSKU.setSelectedIndex(-1);
-        }
-        calcularSubtotal();
-    }//GEN-LAST:event_btnAgregarActionPerformed
+    private void btnFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarCompraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnFinalizarCompraActionPerformed
 
     private void btnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularActionPerformed
-        // Get the total amount to pay
-        double totalAPagar = 0.0;
-        try {
-            totalAPagar = Double.parseDouble(jLabeTotalAPagar2.getText().replace("L. ", ""));
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Error al obtener el total a pagar.");
-            return;
-        }
-        // Get the payment amount from jTFdPago
-        double pago = 0.0;
-        try {
-            pago = Double.parseDouble(jTFdPago.getText());
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Por favor, ingrese un monto de pago válido.");
-            return;
-        }
-        // Calculate the change
-        double cambio = pago - totalAPagar;
-        // Update the change label
-        jLabelCambio1.setText("L " + String.format("%.2f", cambio));
-        // Calculate 10% of the total amount to pay
-        double porcentajeCambio = totalAPagar * 0.1;
-        jLabelPuntos.setText("P. " + String.format("%.0f", porcentajeCambio));
-        // Optionally, you can check if the payment is less than the total
-        if (cambio < 0) {
-            JOptionPane.showMessageDialog(this, "El monto de pago es insuficiente.");
-        }
+        // TODO add your handling code here:
     }//GEN-LAST:event_btnCalcularActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -518,229 +334,6 @@ public class Ventas extends javax.swing.JFrame {
     private void txtProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProductoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtProductoActionPerformed
-
-    private void jCBSKUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBSKUActionPerformed
-        String selectedItem = (String) jCBSKU.getSelectedItem();
-        if (selectedItem != null) {
-            // Separar la descripción y la categoría
-            String[] parts = selectedItem.split(" - ");
-            if (parts.length >= 1) {
-                txtProducto.setText(parts[0]); // Descripción
-            }
-        }
-    }//GEN-LAST:event_jCBSKUActionPerformed
-
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        // Obtener el modelo de la tabla
-        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-
-        // Obtener la fila seleccionada
-        int selectedRow = jTable2.getSelectedRow();
-
-        // Verificar si hay una fila seleccionada
-        if (selectedRow != -1) {
-            // Eliminar la fila seleccionada
-            model.removeRow(selectedRow);
-            calcularSubtotal();
-        } else {
-            // Mostrar un mensaje si no hay fila seleccionada
-            JOptionPane.showMessageDialog(this, "Por favor, seleccione una fila para eliminar.");
-        }
-    }//GEN-LAST:event_btnEliminarActionPerformed
-
-    private void jCBCidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBCidActionPerformed
-        String selectedItem = (String) jCBCid.getSelectedItem();
-        if (selectedItem != null) {
-            // Obtener el ID del cliente basado en la identidad seleccionada
-            String sql = "SELECT puntos FROM clientes WHERE identidad = ?";
-            try (Connection conn = new Conexion().estableceConexion(); 
-                 PreparedStatement pst = conn.prepareStatement(sql)) {
-                pst.setString(1, selectedItem);
-                ResultSet rs = pst.executeQuery();
-                if (rs.next()) {
-                    int puntos = rs.getInt("puntos");
-                    jLblpuntos.setText("Puntos: " + puntos); // Actualizar el JLabel con los puntos
-                }
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Error al cargar puntos: " + e.getMessage());
-            }
-        }
-    }//GEN-LAST:event_jCBCidActionPerformed
-
-    private void btnImprimirFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirFacturaActionPerformed
-        // Gather data from the form
-
-        int id = Integer.parseInt(jTFCodigo.getText());
-        double impuesto = Double.parseDouble(jLblImpuesto.getText().replace("L. ", ""));
-        double descuento = Double.parseDouble(jTFDescuento1.getText());
-        double subtotal = Double.parseDouble(jLblSubTotal.getText().replace("L. ", ""));
-        double totalAPagar = Double.parseDouble(jLabeTotalAPagar2.getText().replace("L. ", ""));
-
-        // Get the selected client ID from jCBCid
-        String selectedClient = (String) jCBCid.getSelectedItem();
-        int clienteId = 0;
-        String sqlClientId = "SELECT id, puntos FROM clientes WHERE identidad = ?";
-        int puntosActuales = 0; // Variable to hold current points
-        try (Connection conn = new Conexion().estableceConexion(); 
-             PreparedStatement pst = conn.prepareStatement(sqlClientId)) {
-            pst.setString(1, selectedClient);
-            ResultSet rs = pst.executeQuery();
-            if (rs.next()) {
-                clienteId = rs.getInt("id");
-                puntosActuales = rs.getInt("puntos"); // Get current points
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error al obtener el ID del cliente: " + e.getMessage());
-            return;
-        }
-
-        // Calculate new points
-        String puntosText = jLabelPuntos.getText().replace("P. ", ""); // Extract the number of points earned
-        int puntosGanados = 0;
-        try {
-            puntosGanados = Integer.parseInt(puntosText);
-        } catch (NumberFormatException e) {
-            puntosGanados = 0; // Default to 0 if parsing fails
-        }
-
-        int nuevosPuntos = puntosActuales - (int) descuento + puntosGanados; // Calculate new points
-
-        // Assuming you have a variable for the logged-in user ID
-        //int usuarioId = getLoggedInUser  Id(); // Replace with your method to get the logged-in user ID
-        int usuarioId = 1;
-
-        // Prepare the SQL INSERT statement for ventasencabezado
-        String sqlInsertHeader = "INSERT INTO ventasencabezado (id, impuesto, descuento, subtotal, totalapagar, clientes_id, usuarios_idusuarios) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        try (Connection conn = new Conexion().estableceConexion(); 
-             PreparedStatement pstHeader = conn.prepareStatement(sqlInsertHeader)) {
-            pstHeader.setInt(1, id);
-            pstHeader.setDouble(2, impuesto);
-            pstHeader.setDouble(3, descuento);
-            pstHeader.setDouble(4, subtotal);
-            pstHeader.setDouble(5, totalAPagar);
-            pstHeader.setInt(6, clienteId);
-            pstHeader.setInt(7, usuarioId);
-
-            // Execute the insert for ventasencabezado
-            pstHeader.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Factura guardada exitosamente.");
-
-            // Now save the details from jTable2 into ventasdetalle
-            String sqlInsertDetail = "INSERT INTO ventasdetalle (idproductoventa, cantidad, precio, ventasencabezado_id) VALUES (?, ?, ?, ?)";
-            DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-            for (int i = 0; i < model.getRowCount(); i++) {
-                String sku = (String) model.getValueAt(i, 0); // SKU
-                int cantidad = (int) model.getValueAt(i, 2); // Cantidad
-                double precio = (double) model.getValueAt(i, 3); // Precio
-
-                // Get the product ID from the database using SKU
-                int productId = 0;
-                String sqlProductId = "SELECT idcodigos FROM productos WHERE sku = ?";
-                try (PreparedStatement pstProduct = conn.prepareStatement(sqlProductId)) {
-                    pstProduct.setString(1, sku);
-                    ResultSet rsProduct = pstProduct.executeQuery();
-                    if (rsProduct.next()) {
-                        productId = rsProduct.getInt("idcodigos");
-                    }
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(this, "Error al obtener el ID del producto: " + e.getMessage());
-                    return;
-                }
-
-                // Insert into ventasdetalle
-                try (PreparedStatement pstDetail = conn.prepareStatement(sqlInsertDetail)) {
-                    pstDetail.setInt(1, productId);
-                    pstDetail.setInt(2, cantidad);
-                    pstDetail.setDouble(3, precio);
-                    pstDetail.setInt(4, id); // ventasencabezado_id
-                    pstDetail.executeUpdate();
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(this, "Error al guardar los detalles de la factura: " + e.getMessage());
-                }
-                
-                // Update product stock
-                String sqlUpdateStock = "UPDATE productos SET existencia = existencia - ? WHERE idcodigos = ?";
-                try (PreparedStatement pstUpdateStock = conn.prepareStatement(sqlUpdateStock)) {
-                    pstUpdateStock.setInt(1, cantidad);
-                    pstUpdateStock.setInt(2, productId);
-                    pstUpdateStock.executeUpdate();
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(this, "Error al actualizar el stock del producto: " + e.getMessage());
-                }
-
-                // Insert into movimientos
-                String sqlInsertMovement = "INSERT INTO movimientos (idcodigos, fecha, tipomovimiento, cantidad, usuario) VALUES (?, CURRENT_DATE, 'Salida', ?, ?)";
-                try (PreparedStatement pstMovement = conn.prepareStatement(sqlInsertMovement)) {
-                    pstMovement.setInt(1, productId);
-                    pstMovement.setInt(2, cantidad);
-                    pstMovement.setInt(3, usuarioId);
-                    pstMovement.executeUpdate();
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(this, "Error al registrar el movimiento: " + e.getMessage());
-                }
-            }
-            
-            // Update the points in the clientes table
-            String sqlUpdatePoints = "UPDATE clientes SET puntos = ? WHERE id = ?";
-            try (PreparedStatement pstUpdate = conn.prepareStatement(sqlUpdatePoints)) {
-                pstUpdate.setInt(1, nuevosPuntos);
-                pstUpdate.setInt(2, clienteId);
-                pstUpdate.executeUpdate();
-                JOptionPane.showMessageDialog(this, "Puntos actualizados exitosamente.");
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Error al actualizar los puntos del cliente: " + e.getMessage());
-            }
-        // Preguntar si desea enviar correo
-        int opcion = JOptionPane.showConfirmDialog(this, "¿Deseas enviar el correo al cliente?", "Enviar correo", JOptionPane.YES_NO_OPTION);
-        if (opcion == JOptionPane.YES_OPTION) {
-            String correoCliente = "";
-            String sqlCorreo = "SELECT correo FROM clientes WHERE id = ?";
-            try (PreparedStatement pstCorreo = conn.prepareStatement(sqlCorreo)) {
-                pstCorreo.setInt(1, clienteId);
-                try (ResultSet rsCorreo = pstCorreo.executeQuery()) {
-                    if (rsCorreo.next()) {
-                        correoCliente = rsCorreo.getString("correo");
-                    }
-                }
-            }
-
-            if (correoCliente == null || correoCliente.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "El cliente no tiene un correo válido registrado.");
-            } else {
-                String asunto = "Factura guardada";
-                String mensaje = "Su factura con ID " + id + " fue guardada correctamente.";
-                EnviarCorreo.enviar(correoCliente, asunto, mensaje);
-                JOptionPane.showMessageDialog(this, "Correo enviado al cliente: " + correoCliente);
-            }
-        }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error al guardar la factura: " + e.getMessage());
-        }
-     
-        //ReporteFactura
-        try {
-        Connection conn = new Conexion().estableceConexion();
-        InputStream jasperStream = getClass().getResourceAsStream("/Reportes/ReportesFactura.jasper");
-        if (jasperStream == null) {
-            throw new RuntimeException("No se encontro el archivo ReportesFactura.jasper en el classpath.");
-        }
-
-        JasperReport reporte = (JasperReport) JRLoader.loadObject(jasperStream);
-        Map<String, Object> parametros = new HashMap<>();
-        parametros.put("IdFactura", id);
-
-        JasperPrint print = JasperFillManager.fillReport(reporte, parametros, conn);
-        JasperViewer viewer = new JasperViewer(print, false);
-        viewer.setTitle("Factura #" + id);
-        viewer.setVisible(true);
-
-    } catch (Exception e) {
-        e.printStackTrace();
-        JOptionPane.showMessageDialog(this, "Error al guardar o imprimir la factura: " + e.getMessage());
-    }
-
-        
-    }//GEN-LAST:event_btnImprimirFacturaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -779,35 +372,31 @@ public class Ventas extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
-    private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnCalcular;
     private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnFinalizarCompra;
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnImprimirFactura;
     private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox<String> jCBCid;
     private javax.swing.JComboBox<String> jCBSKU;
-    private javax.swing.JLabel jLabeTotalAPagar2;
-    private javax.swing.JLabel jLabeTotalAPagar3;
+    private javax.swing.JLabel jLabeTotalAPagar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabelCambio1;
-    private javax.swing.JLabel jLabelPuntos;
-    private javax.swing.JLabel jLblImpuesto;
-    private javax.swing.JLabel jLblSubTotal;
-    private javax.swing.JLabel jLblpuntos;
+    private javax.swing.JLabel jLabelCambio;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTFCodigo;
-    private javax.swing.JTextField jTFDescuento1;
-    private javax.swing.JTextField jTFdPago;
     private javax.swing.JTable jTable2;
     private javax.swing.JTextField txtCantidad;
-    private javax.swing.JLabel txtPago;
+    private javax.swing.JTextField txtCategoria;
+    private javax.swing.JTextField txtPago;
     private javax.swing.JTextField txtProducto;
     // End of variables declaration//GEN-END:variables
 }
