@@ -13,9 +13,7 @@
 	<queryString>
 		<![CDATA[SELECT
   ve.id AS factura_numero,
-  ve.cliente AS identidad_cliente,
   ve.clientes_id AS id_cliente,
-  ve.rtn,
   ve.subtotal,
   ve.impuesto,
   ve.descuento,
@@ -32,11 +30,7 @@ JOIN clientes c ON ve.clientes_id = c.id
 WHERE ve.id = $P{IdFactura}]]>
 	</queryString>
 	<field name="factura_numero" class="java.lang.Integer"/>
-	<field name="identidad_cliente" class="java.lang.Integer"/>
 	<field name="id_cliente" class="java.lang.Integer"/>
-	<field name="rtn" class="java.lang.Integer">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
 	<field name="subtotal" class="java.lang.Double">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
@@ -116,49 +110,27 @@ WHERE ve.id = $P{IdFactura}]]>
 				<textFieldExpression><![CDATA[$F{factura_numero}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Detail" x="462" y="29" width="42" height="15" uuid="96adee87-1828-4125-9e94-c88c3d50ab45"/>
+				<reportElement style="Detail" x="82" y="41" width="42" height="15" uuid="96adee87-1828-4125-9e94-c88c3d50ab45"/>
 				<textFieldExpression><![CDATA[$F{nombre_cajero}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="72" y="0" width="100" height="20" uuid="10481131-2888-4fa9-8b91-fe690a4d2dd7"/>
-				<textElement>
-					<font size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{id_cliente}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="73" y="50" width="100" height="20" uuid="e005238a-24f7-4e18-9903-a79c2bc7f236"/>
+				<reportElement x="90" y="0" width="100" height="20" uuid="10481131-2888-4fa9-8b91-fe690a4d2dd7"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{id_cliente}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement style="Column header" x="3" y="2" width="62" height="15" uuid="5b04e35c-058b-4a20-9c82-860f117bcd16"/>
-				<text><![CDATA[# Cliente: ]]></text>
+				<reportElement style="Column header" x="3" y="2" width="87" height="15" uuid="5b04e35c-058b-4a20-9c82-860f117bcd16"/>
+				<text><![CDATA[ID de Cliente: ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" x="381" y="1" width="66" height="18" uuid="0b9fc890-3453-40d3-8b20-094eeb6a6ae9"/>
 				<text><![CDATA[N° Factura: ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="382" y="29" width="42" height="15" uuid="52ed2691-8c0d-4e21-a750-7b60a03b86c9"/>
+				<reportElement style="Column header" x="2" y="41" width="42" height="15" uuid="52ed2691-8c0d-4e21-a750-7b60a03b86c9"/>
 				<text><![CDATA[Cajero: ]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="73" y="25" width="100" height="20" uuid="52f2df24-0c26-474e-8539-fb89aa78b5c7"/>
-				<textElement>
-					<font size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{rtn}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement style="Column header" x="5" y="26" width="62" height="15" uuid="ac65139b-a3a1-485a-828b-cf2927369fa6"/>
-				<text><![CDATA[RTN: ]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" x="4" y="50" width="62" height="15" uuid="0afaa971-be3d-4115-8a9e-344a0d919990"/>
-				<text><![CDATA[Id Cliente: ]]></text>
 			</staticText>
 			<line>
 				<reportElement positionType="FixRelativeToBottom" x="1" y="88" width="554" height="1" uuid="2c0e0ca6-2229-4a83-b93b-1bfdc76a8d18"/>
