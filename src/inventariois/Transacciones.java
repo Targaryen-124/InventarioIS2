@@ -162,11 +162,11 @@ public class Transacciones extends javax.swing.JFrame {
 
         cboTransaccion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cboTransaccion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Entrada", "Salida" }));
-        jPanel1.add(cboTransaccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(183, 218, 203, 35));
+        jPanel1.add(cboTransaccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, 203, 35));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("Transaccion:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 225, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, -1, -1));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -174,18 +174,18 @@ public class Transacciones extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 911, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 785, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 50, -1, -1));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 50, 800, 270));
 
         btnGuardar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/guardar-carpeta.png"))); // NOI18N
@@ -195,7 +195,7 @@ public class Transacciones extends javax.swing.JFrame {
                 btnGuardarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(646, 433, -1, -1));
+        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 330, -1, -1));
 
         btnCancelar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/desactivado.png"))); // NOI18N
@@ -205,7 +205,7 @@ public class Transacciones extends javax.swing.JFrame {
                 btnCancelarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(807, 433, -1, -1));
+        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 330, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(255, 204, 255));
 
@@ -217,9 +217,9 @@ public class Transacciones extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(382, 382, 382)
+                .addGap(353, 353, 353)
                 .addComponent(jLabel2)
-                .addContainerGap(446, Short.MAX_VALUE))
+                .addContainerGap(475, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -237,7 +237,7 @@ public class Transacciones extends javax.swing.JFrame {
                 btnReporteSalidaActionPerformed(evt);
             }
         });
-        getContentPane().add(btnReporteSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 440, -1, -1));
+        getContentPane().add(btnReporteSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 330, 110, 40));
 
         btnReporteEntrada.setText("Reporte EN");
         btnReporteEntrada.addActionListener(new java.awt.event.ActionListener() {
@@ -245,7 +245,7 @@ public class Transacciones extends javax.swing.JFrame {
                 btnReporteEntradaActionPerformed(evt);
             }
         });
-        getContentPane().add(btnReporteEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 440, -1, -1));
+        getContentPane().add(btnReporteEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 330, 110, 40));
 
         btnReportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Invoice_1.png"))); // NOI18N
         btnReportes.setText("Reportes");
@@ -254,7 +254,7 @@ public class Transacciones extends javax.swing.JFrame {
                 btnReportesActionPerformed(evt);
             }
         });
-        getContentPane().add(btnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 430, -1, -1));
+        getContentPane().add(btnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 330, -1, -1));
 
         btnDescargarReportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Downloading Updates.png"))); // NOI18N
         btnDescargarReportes.setText("Descargar R");
@@ -263,7 +263,7 @@ public class Transacciones extends javax.swing.JFrame {
                 btnDescargarReportesActionPerformed(evt);
             }
         });
-        getContentPane().add(btnDescargarReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 430, -1, -1));
+        getContentPane().add(btnDescargarReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, -1, -1));
 
         pack();
         setLocationRelativeTo(null);
