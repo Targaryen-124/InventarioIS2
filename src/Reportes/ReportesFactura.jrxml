@@ -14,7 +14,7 @@
 		<![CDATA[SELECT
   ve.id AS factura_numero,
   ve.cliente AS identidad_cliente,
-  ve.clientes_id1 AS id_cliente,
+  ve.clientes_id AS id_cliente,
   ve.rtn,
   ve.subtotal,
   ve.impuesto,
@@ -28,7 +28,7 @@
 FROM ventasencabezado ve
 JOIN ventasdetalle vd ON ve.id = vd.ventasencabezado_id
 JOIN usuarios u ON ve.usuarios_idusuarios = u.idusuarios
-JOIN clientes c ON ve.clientes_id1 = c.id
+JOIN clientes c ON ve.clientes_id = c.id
 WHERE ve.id = $P{IdFactura}]]>
 	</queryString>
 	<field name="factura_numero" class="java.lang.Integer"/>

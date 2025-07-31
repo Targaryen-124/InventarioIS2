@@ -4,6 +4,16 @@
  */
 package inventariois;
 
+import inventariois.Categorias;
+import inventariois.Clientes;
+import inventariois.Consulta;
+import inventariois.Factura;
+import inventariois.Imagen;
+import inventariois.Productos;
+import inventariois.Transacciones;
+import inventariois.Unidades;
+import inventariois.Usuarios;
+import inventariois.Ventas;
 import javax.swing.JFrame;
 import javax.swing.*;
 
@@ -42,6 +52,7 @@ public class Principal extends javax.swing.JFrame {
         menuConsultas = new javax.swing.JMenu();
         menuVentas = new javax.swing.JMenu();
         MenuClientes = new javax.swing.JMenu();
+        menuFacturas = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -147,6 +158,18 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenuBar1.add(MenuClientes);
 
+        menuFacturas.setText("Facturas");
+        menuFacturas.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                menuFacturasMenuSelected(evt);
+            }
+        });
+        jMenuBar1.add(menuFacturas);
+
         setJMenuBar(jMenuBar1);
 
         pack();
@@ -236,6 +259,18 @@ public class Principal extends javax.swing.JFrame {
             }
         });
     }//GEN-LAST:event_MenuClientesMenuSelected
+
+    private void menuFacturasMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_menuFacturasMenuSelected
+        // TODO add your handling code here:
+        Factura facturaPanel = new Factura();
+        java.awt.EventQueue.invokeLater(new Runnable(){
+            public void run() {
+                facturaPanel.setVisible(true);
+            }
+            
+        });
+        
+    }//GEN-LAST:event_menuFacturasMenuSelected
   
     public void configurarRol(String rol) {
        if (rol.equalsIgnoreCase("Admin") || rol.equalsIgnoreCase("Supervisor")) {
@@ -304,6 +339,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu menuCategoria;
     private javax.swing.JMenu menuConsultas;
+    private javax.swing.JMenu menuFacturas;
     private javax.swing.JMenu menuProductos;
     private javax.swing.JMenu menuTransacciones;
     private javax.swing.JMenu menuUM;

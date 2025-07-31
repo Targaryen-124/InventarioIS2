@@ -10,7 +10,16 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
+import correo.EnviarCorreo;
+import inventariois.Conexion;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 /**
  *
  * @author Yohana Padilla
@@ -420,7 +429,7 @@ public class Ventas extends javax.swing.JFrame {
         // Calculate the total to pay
         double totalAPagar = subtotal + impuesto - descuento;
         // Update the total to pay label
-        jLabeTotalAPagar2.setText("L. " + String.format("%.2f", totalAPagar)); 
+        jLabeTotalAPagar2.setText("L " + String.format("%.2f", totalAPagar)); 
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
@@ -487,7 +496,7 @@ public class Ventas extends javax.swing.JFrame {
         // Calculate the change
         double cambio = pago - totalAPagar;
         // Update the change label
-        jLabelCambio1.setText("L. " + String.format("%.2f", cambio));
+        jLabelCambio1.setText("L " + String.format("%.2f", cambio));
         // Calculate 10% of the total amount to pay
         double porcentajeCambio = totalAPagar * 0.1;
         jLabelPuntos.setText("P. " + String.format("%.0f", porcentajeCambio));
@@ -560,7 +569,8 @@ public class Ventas extends javax.swing.JFrame {
 
     private void btnImprimirFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirFacturaActionPerformed
         // Gather data from the form
-        int id = Integer.parseInt(jTFCodigo.getText());
+
+         int id = Integer.parseInt(jTFCodigo.getText());
         double impuesto = Double.parseDouble(jLblImpuesto.getText().replace("L. ", ""));
         double descuento = Double.parseDouble(jTFDescuento1.getText());
         double subtotal = Double.parseDouble(jLblSubTotal.getText().replace("L. ", ""));
@@ -596,6 +606,7 @@ public class Ventas extends javax.swing.JFrame {
         int nuevosPuntos = puntosActuales - (int) descuento + puntosGanados; // Calculate new points
 
         // Assuming you have a variable for the logged-in user ID
+        //int usuarioId = getLoggedInUser  Id(); // Replace with your method to get the logged-in user ID
         int usuarioId = 1;
 
         // Prepare the SQL INSERT statement for ventasencabezado
@@ -646,7 +657,7 @@ public class Ventas extends javax.swing.JFrame {
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(this, "Error al guardar los detalles de la factura: " + e.getMessage());
                 }
-
+                
                 // Update product stock
                 String sqlUpdateStock = "UPDATE productos SET existencia = existencia - ? WHERE idcodigos = ?";
                 try (PreparedStatement pstUpdateStock = conn.prepareStatement(sqlUpdateStock)) {
@@ -667,6 +678,7 @@ public class Ventas extends javax.swing.JFrame {
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(this, "Error al registrar el movimiento: " + e.getMessage());
                 }
+                
             }
 
             // Update the points in the clientes table
@@ -679,10 +691,56 @@ public class Ventas extends javax.swing.JFrame {
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Error al actualizar los puntos del cliente: " + e.getMessage());
             }
+// Preguntar si desea enviar correo
+        int opcion = JOptionPane.showConfirmDialog(this, "¿Deseas enviar el correo al cliente?", "Enviar correo", JOptionPane.YES_NO_OPTION);
+        if (opcion == JOptionPane.YES_OPTION) {
+            String correoCliente = "";
+            String sqlCorreo = "SELECT correo FROM clientes WHERE id = ?";
+            try (PreparedStatement pstCorreo = conn.prepareStatement(sqlCorreo)) {
+                pstCorreo.setInt(1, clienteId);
+                try (ResultSet rsCorreo = pstCorreo.executeQuery()) {
+                    if (rsCorreo.next()) {
+                        correoCliente = rsCorreo.getString("correo");
+                    }
+                }
+            }
 
+            if (correoCliente == null || correoCliente.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "El cliente no tiene un correo válido registrado.");
+            } else {
+                String asunto = "Factura guardada";
+                String mensaje = "Su factura con ID " + id + " fue guardada correctamente.";
+                EnviarCorreo.enviar(correoCliente, asunto, mensaje);
+                JOptionPane.showMessageDialog(this, "Correo enviado al cliente: " + correoCliente);
+            }
+        }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error al guardar la factura: " + e.getMessage());
         }
+     
+        //ReporteFactura
+        try {
+        Connection conn = new Conexion().estableceConexion();
+        InputStream jasperStream = getClass().getResourceAsStream("/Reportes/ReportesFactura.jasper");
+        if (jasperStream == null) {
+            throw new RuntimeException("No se encontro el archivo ReportesFactura.jasper en el classpath.");
+        }
+
+        JasperReport reporte = (JasperReport) JRLoader.loadObject(jasperStream);
+        Map<String, Object> parametros = new HashMap<>();
+        parametros.put("IdFactura", id);
+
+        JasperPrint print = JasperFillManager.fillReport(reporte, parametros, conn);
+        JasperViewer viewer = new JasperViewer(print, false);
+        viewer.setTitle("Factura #" + id);
+        viewer.setVisible(true);
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Error al guardar o imprimir la factura: " + e.getMessage());
+    }
+
+        
     }//GEN-LAST:event_btnImprimirFacturaActionPerformed
 
     /**
