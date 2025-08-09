@@ -59,17 +59,19 @@ public class Consulta extends javax.swing.JFrame {
         setTitle("Sistema de Inventario");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jBtnActualizar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jBtnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/transaccion.png"))); // NOI18N
+        jBtnActualizar.setBackground(new java.awt.Color(204, 255, 255));
+        jBtnActualizar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jBtnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Refresh.png"))); // NOI18N
         jBtnActualizar.setText("Actualizar");
         jBtnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnActualizarActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(412, 124, -1, -1));
+        getContentPane().add(jBtnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 130, -1, -1));
 
-        jBtnCancelar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jBtnCancelar.setBackground(new java.awt.Color(204, 255, 255));
+        jBtnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jBtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/desactivado.png"))); // NOI18N
         jBtnCancelar.setText("Cancelar");
         jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -77,11 +79,11 @@ public class Consulta extends javax.swing.JFrame {
                 jBtnCancelarActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(555, 124, -1, -1));
+        getContentPane().add(jBtnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 130, -1, -1));
 
-        jPanel4.setBackground(new java.awt.Color(255, 204, 255));
+        jPanel4.setBackground(new java.awt.Color(102, 204, 255));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setText("MOVIMIENTOS SKU");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -91,7 +93,7 @@ public class Consulta extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(402, 402, 402)
                 .addComponent(jLabel4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(359, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,9 +104,9 @@ public class Consulta extends javax.swing.JFrame {
 
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 0, 932, -1));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("SKU:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 51, 37, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 37, -1));
 
         tablaConsulta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -124,20 +126,20 @@ public class Consulta extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tablaConsulta);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 181, 932, 313));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 181, 920, 210));
 
         jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(159, 44, 360, 34));
+        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 360, 34));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setText("Existencia");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 84, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("0");
         jLabel3.setToolTipText("");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(159, 84, 40, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 40, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -147,7 +149,7 @@ public class Consulta extends javax.swing.JFrame {
 
         try (Connection conn = new Conexion().estableceConexion();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT sku FROM codigos")) {
+             ResultSet rs = stmt.executeQuery("SELECT sku FROM productos")) {
 
             while (rs.next()) {
                 jComboBox1.addItem(rs.getString("sku")); // Agregar cada SKU al JComboBox
@@ -159,7 +161,7 @@ public class Consulta extends javax.swing.JFrame {
     
     private void cargarExistencia(String sku) {
         try (Connection conn = new Conexion().estableceConexion();
-             PreparedStatement pstmt = conn.prepareStatement("SELECT existencia FROM codigos WHERE sku = ?")) { // Cambia "codigos" por el nombre de tu tabla
+             PreparedStatement pstmt = conn.prepareStatement("SELECT existencia FROM productos WHERE sku = ?")) { // Cambia "codigos" por el nombre de tu tabla
             pstmt.setString(1, sku);
             ResultSet rs = pstmt.executeQuery();
 
@@ -181,7 +183,7 @@ public class Consulta extends javax.swing.JFrame {
         try (Connection conn = new Conexion().estableceConexion();
              PreparedStatement pstmt = conn.prepareStatement("SELECT m.idmovimientos, m.fecha, m.tipomovimiento, m.cantidad " +
                                                              "FROM movimientos m " +
-                                                             "JOIN codigos c ON m.idcodigos = c.idcodigos " + // Asegúrate de que el nombre de la columna sea correcto
+                                                             "JOIN productos c ON m.idcodigos = c.idcodigos " + // Asegúrate de que el nombre de la columna sea correcto
                                                              "WHERE c.sku = ?")) {
             pstmt.setString(1, sku);
             ResultSet rs = pstmt.executeQuery();

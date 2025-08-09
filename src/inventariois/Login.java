@@ -4,11 +4,17 @@
  */
 package inventariois;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import javax.swing.JFrame;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -41,6 +47,7 @@ public class Login extends javax.swing.JFrame {
         jBtnSalir = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jTFContra = new javax.swing.JPasswordField();
+        btnManual = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login");
@@ -50,21 +57,22 @@ public class Login extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setText("Sistema de Inventario");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(161, 142, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, -1, -1));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Usuario");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(117, 182, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setText("Contraseña");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(117, 214, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, -1, -1));
 
         jTFUsuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jPanel1.add(jTFUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(197, 179, 180, -1));
+        jPanel1.add(jTFUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, 180, -1));
 
+        jBtnIngresar.setBackground(new java.awt.Color(204, 255, 255));
         jBtnIngresar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jBtnIngresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/contrasena.png"))); // NOI18N
         jBtnIngresar.setText("Ingresar");
@@ -73,8 +81,9 @@ public class Login extends javax.swing.JFrame {
                 jBtnIngresarActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 260, -1, -1));
+        jPanel1.add(jBtnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, -1, -1));
 
+        jBtnSalir.setBackground(new java.awt.Color(204, 255, 255));
         jBtnSalir.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jBtnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/cancelar-compras.png"))); // NOI18N
         jBtnSalir.setText("Salir");
@@ -86,18 +95,28 @@ public class Login extends javax.swing.JFrame {
                 jBtnSalirActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 260, 114, 41));
+        jPanel1.add(jBtnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 300, 114, 41));
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/inventario.png"))); // NOI18N
         jLabel4.setMaximumSize(new java.awt.Dimension(512, 512));
         jLabel4.setMinimumSize(new java.awt.Dimension(512, 512));
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(183, 8, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, -1, 130));
 
         jTFContra.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jPanel1.add(jTFContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(197, 211, 180, -1));
+        jPanel1.add(jTFContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 250, 180, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 460, 310));
+        btnManual.setBackground(new java.awt.Color(204, 255, 255));
+        btnManual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/User Manual.png"))); // NOI18N
+        btnManual.setText("Manual de Usuario");
+        btnManual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnManualActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnManual, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 30));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 460, 360));
 
         pack();
         setLocationRelativeTo(null);
@@ -147,6 +166,29 @@ public class Login extends javax.swing.JFrame {
         return null;
     }//GEN-LAST:event_jBtnIngresarActionPerformed
 
+    private void btnManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManualActionPerformed
+        // TODO add your handling code here:
+        try {
+            // Cargar el PDF como recurso desde dentro del proyecto
+            InputStream inputStream = getClass().getResourceAsStream("/recursos/Tecno´s system_ Manual de Usuario.pdf");
+
+            if (inputStream == null) {
+                JOptionPane.showMessageDialog(null, "El manual no se encuentra en la carpeta de recursos.");
+                return;
+            }
+
+            // Copiar el PDF a un archivo temporal
+            File tempFile = File.createTempFile("Tecno´s system_ Manual de Usuario", ".pdf");
+            Files.copy(inputStream, tempFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+            // Abrir el PDF
+            Desktop.getDesktop().open(tempFile);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error al abrir el manual: " + ex.getMessage());
+        }
+
+    }//GEN-LAST:event_btnManualActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -183,6 +225,7 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnManual;
     private javax.swing.JButton jBtnIngresar;
     private javax.swing.JButton jBtnSalir;
     private javax.swing.JLabel jLabel1;

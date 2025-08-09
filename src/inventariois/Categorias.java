@@ -70,7 +70,8 @@ public class Categorias extends javax.swing.JFrame {
         setTitle("Sistema de Inventario");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jBtnActualizar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jBtnActualizar.setBackground(new java.awt.Color(204, 255, 255));
+        jBtnActualizar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jBtnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/transaccion.png"))); // NOI18N
         jBtnActualizar.setText("Actualizar");
         jBtnActualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -78,9 +79,10 @@ public class Categorias extends javax.swing.JFrame {
                 jBtnActualizarActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, -1, -1));
+        getContentPane().add(jBtnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, -1, -1));
 
-        jBtnCancelar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jBtnCancelar.setBackground(new java.awt.Color(204, 255, 255));
+        jBtnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jBtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/desactivado.png"))); // NOI18N
         jBtnCancelar.setText("Cancelar");
         jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -90,9 +92,9 @@ public class Categorias extends javax.swing.JFrame {
         });
         getContentPane().add(jBtnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 160, -1, -1));
 
-        jPanel4.setBackground(new java.awt.Color(255, 204, 255));
+        jPanel4.setBackground(new java.awt.Color(102, 204, 255));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setText("GESTION DE CATEGORIAS");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -100,22 +102,22 @@ public class Categorias extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(332, 332, 332)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(291, 291, 291)
+                .addComponent(jLabel4)
                 .addContainerGap(395, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jLabel4)
-                .addGap(0, 12, Short.MAX_VALUE))
+                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, -1));
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 30));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("ID:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 44, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, -1, -1));
 
         jTFCodigo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTFCodigo.setEnabled(false);
@@ -126,21 +128,22 @@ public class Categorias extends javax.swing.JFrame {
         });
         getContentPane().add(jTFCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(243, 44, 160, -1));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setText("Categoria:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 88, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, -1, -1));
 
         jTFCategoria.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         getContentPane().add(jTFCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(243, 82, 500, -1));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setText("Descripcion:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 120, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, -1, 30));
 
         jTFDescripcion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         getContentPane().add(jTFDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(243, 114, 500, -1));
 
-        jBtnAgregar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jBtnAgregar.setBackground(new java.awt.Color(204, 255, 255));
+        jBtnAgregar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jBtnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/guardar-carpeta.png"))); // NOI18N
         jBtnAgregar.setText("Agregar");
         jBtnAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -148,9 +151,10 @@ public class Categorias extends javax.swing.JFrame {
                 jBtnAgregarActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, -1, -1));
+        getContentPane().add(jBtnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
 
-        jBtnDesactivar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jBtnDesactivar.setBackground(new java.awt.Color(204, 255, 255));
+        jBtnDesactivar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jBtnDesactivar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/nota.png"))); // NOI18N
         jBtnDesactivar.setText("Desactivar");
         jBtnDesactivar.addActionListener(new java.awt.event.ActionListener() {
@@ -178,8 +182,10 @@ public class Categorias extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tablaCAT);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 203, 870, 328));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 211, 870, 320));
 
+        btnReportes.setBackground(new java.awt.Color(204, 255, 255));
+        btnReportes.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnReportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Invoice_1.png"))); // NOI18N
         btnReportes.setText("Reportes");
         btnReportes.addActionListener(new java.awt.event.ActionListener() {
@@ -187,8 +193,10 @@ public class Categorias extends javax.swing.JFrame {
                 btnReportesActionPerformed(evt);
             }
         });
-        getContentPane().add(btnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 160, -1, -1));
+        getContentPane().add(btnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 160, -1, -1));
 
+        btnDescargarReporte.setBackground(new java.awt.Color(204, 255, 255));
+        btnDescargarReporte.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnDescargarReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Downloading Updates.png"))); // NOI18N
         btnDescargarReporte.setText("D. Reporte");
         btnDescargarReporte.addActionListener(new java.awt.event.ActionListener() {
@@ -196,7 +204,7 @@ public class Categorias extends javax.swing.JFrame {
                 btnDescargarReporteActionPerformed(evt);
             }
         });
-        getContentPane().add(btnDescargarReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 160, -1, -1));
+        getContentPane().add(btnDescargarReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 160, -1, -1));
 
         pack();
         setLocationRelativeTo(null);

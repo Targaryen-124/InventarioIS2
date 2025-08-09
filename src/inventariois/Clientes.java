@@ -53,6 +53,8 @@ public class Clientes extends javax.swing.JFrame {
                 txtApellido.setText(tablaClientes.getValueAt(fila, 3).toString());
                 txtTelefono.setText(tablaClientes.getValueAt(fila, 4).toString());
                 txtPuntos.setText(tablaClientes.getValueAt(fila, 5).toString());
+                txtCorreo.setText(tablaClientes.getValueAt(fila, 6).toString());
+                
             }
         }
     });
@@ -77,7 +79,7 @@ public class Clientes extends javax.swing.JFrame {
         txtIdentidad = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
         txtApellido = new javax.swing.JTextField();
-        txtTelefono = new javax.swing.JTextField();
+        txtCorreo = new javax.swing.JTextField();
         btnAgregar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
@@ -91,6 +93,8 @@ public class Clientes extends javax.swing.JFrame {
         btnSalir = new javax.swing.JButton();
         btnReporteCliente = new javax.swing.JButton();
         btnDescargarReporte = new javax.swing.JButton();
+        txtTelefono = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -98,25 +102,26 @@ public class Clientes extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Clientes"));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("ID:");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 44, 21, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 40, -1));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setText("Identidad:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 84, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setText("Nombre:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 124, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel4.setText("Apellido:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 164, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel5.setText("Telefono:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 212, -1, -1));
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel5.setText("Correo:");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, -1, 40));
+        jLabel5.getAccessibleContext().setAccessibleName("Cerreo:");
 
         txtID.setEditable(false);
         txtID.addActionListener(new java.awt.event.ActionListener() {
@@ -124,12 +129,14 @@ public class Clientes extends javax.swing.JFrame {
                 txtIDActionPerformed(evt);
             }
         });
-        jPanel1.add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 44, 130, -1));
-        jPanel1.add(txtIdentidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 84, 264, -1));
-        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 124, 264, -1));
-        jPanel1.add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 164, 264, -1));
-        jPanel1.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 212, 264, -1));
+        jPanel1.add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 130, 30));
+        jPanel1.add(txtIdentidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 264, 30));
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 264, 30));
+        jPanel1.add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 264, 30));
+        jPanel1.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, 264, 30));
 
+        btnAgregar.setBackground(new java.awt.Color(204, 255, 255));
+        btnAgregar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/guardar-carpeta.png"))); // NOI18N
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -137,8 +144,10 @@ public class Clientes extends javax.swing.JFrame {
                 btnAgregarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(467, 61, -1, -1));
+        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 60, 140, -1));
 
+        btnEditar.setBackground(new java.awt.Color(204, 255, 255));
+        btnEditar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Edit.png"))); // NOI18N
         btnEditar.setText("Editar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -146,8 +155,10 @@ public class Clientes extends javax.swing.JFrame {
                 btnEditarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(593, 61, 118, -1));
+        jPanel1.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 60, 150, -1));
 
+        btnEliminar.setBackground(new java.awt.Color(204, 255, 255));
+        btnEliminar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/desactivado.png"))); // NOI18N
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -155,24 +166,29 @@ public class Clientes extends javax.swing.JFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(467, 204, -1, -1));
+        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 200, 140, -1));
 
+        btnBuscar.setBackground(new java.awt.Color(204, 255, 255));
+        btnBuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/buscar.png"))); // NOI18N
         btnBuscar.setText("Buscar");
+        btnBuscar.setMaximumSize(new java.awt.Dimension(115, 39));
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(467, 129, -1, -1));
+        jPanel1.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 130, 140, 40));
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel6.setText("Puntos:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 246, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, -1, -1));
 
         txtPuntos.setEditable(false);
-        jPanel1.add(txtPuntos, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 246, 264, -1));
+        jPanel1.add(txtPuntos, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, 264, 30));
 
+        btnActualizar.setBackground(new java.awt.Color(204, 255, 255));
+        btnActualizar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Refresh.png"))); // NOI18N
         btnActualizar.setText("Actualizar");
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -180,21 +196,23 @@ public class Clientes extends javax.swing.JFrame {
                 btnActualizarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(593, 129, -1, -1));
+        jPanel1.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 130, 150, -1));
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 0, 0));
 
         tablaClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Identidad", "Nombre", "Apellido", "Telefono", "Puntos"
+                "ID", "Identidad", "Nombre", "Apellido", "Telefono", "Puntos", "Correo"
             }
         ));
         jScrollPane2.setViewportView(tablaClientes);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 294, 914, 201));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 315, 940, 180));
 
+        btnSalir.setBackground(new java.awt.Color(204, 255, 255));
+        btnSalir.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Export_2.png"))); // NOI18N
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -202,8 +220,10 @@ public class Clientes extends javax.swing.JFrame {
                 btnSalirActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(594, 204, 117, -1));
+        jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 200, 150, -1));
 
+        btnReporteCliente.setBackground(new java.awt.Color(204, 255, 255));
+        btnReporteCliente.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnReporteCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Invoice_1.png"))); // NOI18N
         btnReporteCliente.setText("Reportes");
         btnReporteCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -211,8 +231,10 @@ public class Clientes extends javax.swing.JFrame {
                 btnReporteClienteActionPerformed(evt);
             }
         });
-        jPanel1.add(btnReporteCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 60, -1, -1));
+        jPanel1.add(btnReporteCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 60, 140, -1));
 
+        btnDescargarReporte.setBackground(new java.awt.Color(204, 255, 255));
+        btnDescargarReporte.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnDescargarReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Downloading Updates.png"))); // NOI18N
         btnDescargarReporte.setText(" D.Reporte");
         btnDescargarReporte.addActionListener(new java.awt.event.ActionListener() {
@@ -220,16 +242,28 @@ public class Clientes extends javax.swing.JFrame {
                 btnDescargarReporteActionPerformed(evt);
             }
         });
-        jPanel1.add(btnDescargarReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 130, -1, -1));
+        jPanel1.add(btnDescargarReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 130, 140, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 950, -1));
+        txtTelefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTelefonoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, 264, 30));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel7.setText("Telefono:");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, -1, 40));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, -1));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
                                        
-        Conexion conexion = new Conexion();
+     Conexion conexion = new Conexion();
     Connection con = conexion.estableceConexion();
 
     String identidad = txtIdentidad.getText();
@@ -237,8 +271,10 @@ public class Clientes extends javax.swing.JFrame {
     String apellido = txtApellido.getText();
     String telefono = txtTelefono.getText();
     String puntos = "0"; 
+    String correo = txtCorreo.getText();
 
-    String sql = "INSERT INTO clientes (identidad, nombre, apellido, telefono, puntos) VALUES (?, ?, ?, ?, ?)";
+    String sql = "INSERT INTO clientes (identidad, nombre, apellido, telefono, puntos, correo) VALUES (?, ?, ?, ?, ?, ?)";
+   
 
     try {
         PreparedStatement pst = con.prepareStatement(sql);
@@ -249,6 +285,7 @@ public class Clientes extends javax.swing.JFrame {
         pst.setString(3, apellido);
         pst.setString(4, telefono);
         pst.setString(5, puntos); 
+        pst.setString(6, correo);
 
         int filasAfectadas = pst.executeUpdate();
 
@@ -265,11 +302,12 @@ public class Clientes extends javax.swing.JFrame {
         e.printStackTrace(); 
     }
 
+    txtIdentidad.setText("");
     txtNombre.setText("");
     txtApellido.setText("");
     txtTelefono.setText("");
-    txtIdentidad.setText("");
-    txtPuntos.setText("");                               
+    txtPuntos.setText(""); 
+    txtCorreo.setText("");
        
 
         
@@ -281,7 +319,7 @@ public class Clientes extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnReporteClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteClienteActionPerformed
-        // TODO add your handling code here:
+         // TODO add your handling code here:
         try {
            InputStream jasperStream = getClass().getResourceAsStream("/Reportes/ReporteClientes.jasper");
     
@@ -363,15 +401,15 @@ public class Clientes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error al eliminar Cliente: " + e.toString());
             e.printStackTrace();
         }
-    }        
+    }           
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
 
-        // TODO add your handling code here:
+         // TODO add your handling code here:
         
-        Conexion conexion = new Conexion();
-    Connection con = conexion.estableceConexion();
+      Conexion conexion = new Conexion();
+      Connection con = conexion.estableceConexion();
 
     // Check if an ID is selected
     if (txtID.getText().isEmpty()) {
@@ -385,17 +423,19 @@ public class Clientes extends javax.swing.JFrame {
     String apellido = txtApellido.getText();
     String telefono = txtTelefono.getText();
     int puntos = Integer.parseInt(txtPuntos.getText()); // Assuming puntos is an integer
+    String correo = txtCorreo.getText();
 
-    String sql = "UPDATE clientes SET identidad=?, nombre=?, apellido=?, telefono=?, puntos=? WHERE id=?";
+    String sql = "UPDATE clientes SET identidad=?, nombre=?, apellido=?, telefono=?, puntos=?, correo=? WHERE id=?";
 
     try {
         PreparedStatement pst = con.prepareStatement(sql);
-        pst.setString(1, identidad);
-        pst.setString(2, nombre);
-        pst.setString(3, apellido);
-        pst.setString(4, telefono);
-        pst.setInt(5, puntos);
-        pst.setInt(6, id);
+         pst.setInt(1, id);
+        pst.setString(2, identidad);
+        pst.setString(3, nombre);
+        pst.setString(4, apellido);
+        pst.setString(5, telefono);
+        pst.setInt(6, puntos);
+        pst.setString(7, correo);
 
         int filasAfectadas = pst.executeUpdate();
 
@@ -415,10 +455,11 @@ public class Clientes extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Error al editar Cliente: " + e.toString());
         e.printStackTrace();
     }
+
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        // TODO add your handling code here:
+         // TODO add your handling code here:
         
     Conexion conexion = new Conexion();
     Connection con = conexion.estableceConexion();
@@ -429,7 +470,7 @@ public class Clientes extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) tablaClientes.getModel();
         modelo.setRowCount(0); // Clear existing rows
 
-        String sql = "SELECT id, identidad, nombre, apellido, telefono, puntos FROM clientes WHERE id LIKE ? OR identidad LIKE ? OR nombre LIKE ? ORDER BY id DESC";
+        String sql = "SELECT id, identidad, nombre, apellido, telefono, puntos, correo FROM clientes WHERE id LIKE ? OR identidad LIKE ? OR nombre LIKE ? ORDER BY id DESC";
 
         try {
             PreparedStatement pst = con.prepareStatement(sql);
@@ -448,7 +489,8 @@ public class Clientes extends javax.swing.JFrame {
                     rs.getString("nombre"),
                     rs.getString("apellido"),
                     rs.getString("telefono"),
-                    rs.getInt("puntos")
+                    rs.getInt("puntos"),
+                    rs.getInt("correo")
                 };
                 modelo.addRow(fila);
             }
@@ -465,6 +507,8 @@ public class Clientes extends javax.swing.JFrame {
     } else {
         cargarClientes(); // If search term is empty, reload all clients
     }
+    
+
 
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -484,11 +528,17 @@ public class Clientes extends javax.swing.JFrame {
     txtApellido.setText("");
     txtTelefono.setText("");
     txtPuntos.setText(""); // Or set to "0" if points are always 0 initially
+    txtCorreo.setText("");
+ // Or set to "0" if points are always 0 initially
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIDActionPerformed
+
+    private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTelefonoActionPerformed
 
     public void generarReportePDF() {
     try {
@@ -537,12 +587,12 @@ public class Clientes extends javax.swing.JFrame {
 }
     
      private void cargarClientes() {
-        Connection con = new Conexion().estableceConexion();
+         Connection con = new Conexion().estableceConexion();
 
         DefaultTableModel modelo = (DefaultTableModel) tablaClientes.getModel();
         modelo.setRowCount(0);
 
-        String sql = "SELECT id, identidad, nombre, apellido, telefono, puntos FROM clientes ORDER BY id DESC";
+        String sql = "SELECT id, identidad, nombre, apellido, telefono, puntos, correo FROM clientes ORDER BY id DESC";
 
         try {
             Statement st = con.createStatement();
@@ -556,6 +606,7 @@ public class Clientes extends javax.swing.JFrame {
                     rs.getString("apellido"),
                     rs.getString("telefono"),
                     rs.getString("puntos"),
+                    rs.getString("correo")
                 };
                 modelo.addRow(fila);
             }
@@ -565,6 +616,7 @@ public class Clientes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error al cargar Clientes: " + e.toString());
         }
     }
+
     
     /**
      * @param args the command line arguments
@@ -606,11 +658,13 @@ public class Clientes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tablaClientes;
     private javax.swing.JTextField txtApellido;
+    private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtIdentidad;
     private javax.swing.JTextField txtNombre;

@@ -58,7 +58,7 @@ public class Transacciones extends javax.swing.JFrame {
             String tipoMovimiento = (String) this.cboTransaccion.getSelectedItem();
             int cantidad = (Integer) this.spinnerUno.getValue();
 
-            String sqlUpdate = "UPDATE codigos SET existencia = existencia " + (tipoMovimiento.equals("Entrada") ? "+" : "-") + " ? WHERE idcodigos = ?";
+            String sqlUpdate = "UPDATE productos SET existencia = existencia " + (tipoMovimiento.equals("Entrada") ? "+" : "-") + " ? WHERE idcodigos = ?";
             PreparedStatement updateStmt = conn.prepareStatement(sqlUpdate);
             updateStmt.setInt(1, cantidad);
             updateStmt.setInt(2, this.idCodigoSeleccionado);
@@ -127,13 +127,13 @@ public class Transacciones extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("SKU:");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 25, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setText("Descripcion:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 63, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, -1, -1));
 
         cboItems.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cboItems.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -147,26 +147,26 @@ public class Transacciones extends javax.swing.JFrame {
                 cboItemsActionPerformed(evt);
             }
         });
-        jPanel1.add(cboItems, new org.netbeans.lib.awtextra.AbsoluteConstraints(183, 1, 385, 40));
+        jPanel1.add(cboItems, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, 385, 40));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel4.setText("Cantidad:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 126, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, -1, -1));
 
         spinnerUno.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jPanel1.add(spinnerUno, new org.netbeans.lib.awtextra.AbsoluteConstraints(183, 119, 203, 34));
+        jPanel1.add(spinnerUno, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 140, 203, 34));
 
         txtDescripcion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtDescripcion.setEnabled(false);
-        jPanel1.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(183, 63, 385, 38));
+        jPanel1.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 385, 38));
 
         cboTransaccion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cboTransaccion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Entrada", "Salida" }));
-        jPanel1.add(cboTransaccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, 203, 35));
+        jPanel1.add(cboTransaccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, 203, 35));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel5.setText("Transaccion:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, -1, -1));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -174,8 +174,8 @@ public class Transacciones extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 785, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,9 +185,10 @@ public class Transacciones extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 50, 800, 270));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 50, 730, -1));
 
-        btnGuardar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnGuardar.setBackground(new java.awt.Color(204, 255, 255));
+        btnGuardar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/guardar-carpeta.png"))); // NOI18N
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -195,9 +196,10 @@ public class Transacciones extends javax.swing.JFrame {
                 btnGuardarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 330, -1, -1));
+        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 330, 150, -1));
 
-        btnCancelar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnCancelar.setBackground(new java.awt.Color(204, 255, 255));
+        btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/desactivado.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -205,11 +207,11 @@ public class Transacciones extends javax.swing.JFrame {
                 btnCancelarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 330, -1, -1));
+        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 330, 150, -1));
 
-        jPanel2.setBackground(new java.awt.Color(255, 204, 255));
+        jPanel2.setBackground(new java.awt.Color(102, 204, 255));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("TRANSACCIONES");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -217,36 +219,44 @@ public class Transacciones extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(353, 353, 353)
+                .addGap(303, 303, 303)
                 .addComponent(jLabel2)
-                .addContainerGap(475, Short.MAX_VALUE))
+                .addContainerGap(491, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 943, -1));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 943, 40));
 
+        btnReporteSalida.setBackground(new java.awt.Color(204, 255, 255));
+        btnReporteSalida.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnReporteSalida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Invoice_3.png"))); // NOI18N
         btnReporteSalida.setText("Reporte SA");
         btnReporteSalida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReporteSalidaActionPerformed(evt);
             }
         });
-        getContentPane().add(btnReporteSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 330, 110, 40));
+        getContentPane().add(btnReporteSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 380, 170, 40));
 
+        btnReporteEntrada.setBackground(new java.awt.Color(204, 255, 255));
+        btnReporteEntrada.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnReporteEntrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Invoice_2.png"))); // NOI18N
         btnReporteEntrada.setText("Reporte EN");
         btnReporteEntrada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReporteEntradaActionPerformed(evt);
             }
         });
-        getContentPane().add(btnReporteEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 330, 110, 40));
+        getContentPane().add(btnReporteEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 380, 150, 40));
 
+        btnReportes.setBackground(new java.awt.Color(204, 255, 255));
+        btnReportes.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnReportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Invoice_1.png"))); // NOI18N
         btnReportes.setText("Reportes");
         btnReportes.addActionListener(new java.awt.event.ActionListener() {
@@ -254,8 +264,10 @@ public class Transacciones extends javax.swing.JFrame {
                 btnReportesActionPerformed(evt);
             }
         });
-        getContentPane().add(btnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 330, -1, -1));
+        getContentPane().add(btnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 380, 150, -1));
 
+        btnDescargarReportes.setBackground(new java.awt.Color(204, 255, 255));
+        btnDescargarReportes.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnDescargarReportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Downloading Updates.png"))); // NOI18N
         btnDescargarReportes.setText("Descargar R");
         btnDescargarReportes.addActionListener(new java.awt.event.ActionListener() {
@@ -263,7 +275,7 @@ public class Transacciones extends javax.swing.JFrame {
                 btnDescargarReportesActionPerformed(evt);
             }
         });
-        getContentPane().add(btnDescargarReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, -1, -1));
+        getContentPane().add(btnDescargarReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 330, 170, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -286,7 +298,7 @@ public class Transacciones extends javax.swing.JFrame {
         Connection conn = null;
         try {
             conn = new Conexion().estableceConexion();
-            String sql = "SELECT idcodigos, descripcion FROM codigos WHERE sku = ?";
+            String sql = "SELECT idcodigos, descripcion FROM productos WHERE sku = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             String skuSeleccionado = (String) cboItems.getSelectedItem(); 
@@ -561,7 +573,7 @@ public class Transacciones extends javax.swing.JFrame {
         Connection conn = null;
         try {
             conn = new Conexion().estableceConexion();
-            String sql = "SELECT sku FROM codigos";
+            String sql = "SELECT sku FROM productos";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
 

@@ -57,17 +57,19 @@ public class Unidades extends javax.swing.JFrame {
         setTitle("Sistema de Inventario");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jBtnActualizar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jBtnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/transaccion.png"))); // NOI18N
+        jBtnActualizar.setBackground(new java.awt.Color(204, 255, 255));
+        jBtnActualizar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jBtnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Refresh.png"))); // NOI18N
         jBtnActualizar.setText("Actualizar");
         jBtnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnActualizarActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, -1, -1));
+        getContentPane().add(jBtnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, -1, -1));
 
-        jBtnCancelar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jBtnCancelar.setBackground(new java.awt.Color(204, 255, 255));
+        jBtnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jBtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/desactivado.png"))); // NOI18N
         jBtnCancelar.setText("Cancelar");
         jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -75,11 +77,11 @@ public class Unidades extends javax.swing.JFrame {
                 jBtnCancelarActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 160, -1, -1));
+        getContentPane().add(jBtnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 170, -1, -1));
 
-        jPanel4.setBackground(new java.awt.Color(255, 204, 255));
+        jPanel4.setBackground(new java.awt.Color(102, 204, 255));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setText("GESTION DE UM");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -89,20 +91,20 @@ public class Unidades extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(345, 345, 345)
                 .addComponent(jLabel4)
-                .addContainerGap(368, Short.MAX_VALUE))
+                .addContainerGap(334, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(jLabel4)
-                .addGap(0, 12, Short.MAX_VALUE))
+                .addGap(0, 5, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, -1));
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 30));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("ID:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 44, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, -1, -1));
 
         jTFCodigo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTFCodigo.setEnabled(false);
@@ -111,23 +113,24 @@ public class Unidades extends javax.swing.JFrame {
                 jTFCodigoActionPerformed(evt);
             }
         });
-        getContentPane().add(jTFCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(243, 44, 97, -1));
+        getContentPane().add(jTFCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 40, 97, -1));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setText("Unidad:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 88, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, -1, -1));
 
         jTFUnidad.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        getContentPane().add(jTFUnidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(243, 82, 150, -1));
+        getContentPane().add(jTFUnidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 80, 150, -1));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setText("Descripcion:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 120, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, -1, -1));
 
         jTFDescripcion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        getContentPane().add(jTFDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(243, 114, 369, -1));
+        getContentPane().add(jTFDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 120, 369, -1));
 
-        jBtnAgregar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jBtnAgregar.setBackground(new java.awt.Color(204, 255, 255));
+        jBtnAgregar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jBtnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/guardar-carpeta.png"))); // NOI18N
         jBtnAgregar.setText("Agregar");
         jBtnAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -135,9 +138,10 @@ public class Unidades extends javax.swing.JFrame {
                 jBtnAgregarActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, -1, -1));
+        getContentPane().add(jBtnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, -1, -1));
 
-        jBtnDesactivar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jBtnDesactivar.setBackground(new java.awt.Color(204, 255, 255));
+        jBtnDesactivar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jBtnDesactivar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/nota.png"))); // NOI18N
         jBtnDesactivar.setText("Desactivar");
         jBtnDesactivar.addActionListener(new java.awt.event.ActionListener() {
@@ -145,7 +149,7 @@ public class Unidades extends javax.swing.JFrame {
                 jBtnDesactivarActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnDesactivar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 160, -1, -1));
+        getContentPane().add(jBtnDesactivar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 170, 140, -1));
 
         tablaUM.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -165,7 +169,7 @@ public class Unidades extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tablaUM);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 203, 810, 402));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 225, 810, 380));
 
         pack();
         setLocationRelativeTo(null);

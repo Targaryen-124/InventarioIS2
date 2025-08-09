@@ -15,6 +15,7 @@ import inventariois.Conexion;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
@@ -168,21 +169,21 @@ public class Ventas extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos Generales"));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("SKU:");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setText("Producto:");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setText("Cantidad:");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel5.setText("Cliente ID:");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
 
         txtCantidad.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtCantidad.addActionListener(new java.awt.event.ActionListener() {
@@ -190,9 +191,10 @@ public class Ventas extends javax.swing.JFrame {
                 txtCantidadActionPerformed(evt);
             }
         });
-        jPanel2.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, 80, -1));
+        jPanel2.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, 80, -1));
 
-        btnEliminar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnEliminar.setBackground(new java.awt.Color(204, 255, 255));
+        btnEliminar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/desactivado.png"))); // NOI18N
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -200,8 +202,10 @@ public class Ventas extends javax.swing.JFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
-        jPanel2.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, -1, 40));
+        jPanel2.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 190, 130, 40));
 
+        btnAgregar.setBackground(new java.awt.Color(204, 255, 255));
+        btnAgregar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Edit.png"))); // NOI18N
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -209,11 +213,11 @@ public class Ventas extends javax.swing.JFrame {
                 btnAgregarActionPerformed(evt);
             }
         });
-        jPanel2.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, -1, 40));
+        jPanel2.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 190, 130, 40));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setText("FACTURA # ");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 10, -1, -1));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, -1, -1));
 
         jTFCodigo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jTFCodigo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -223,7 +227,7 @@ public class Ventas extends javax.swing.JFrame {
                 jTFCodigoActionPerformed(evt);
             }
         });
-        jPanel2.add(jTFCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 10, 100, -1));
+        jPanel2.add(jTFCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 10, 100, -1));
 
         jCBCid.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jCBCid.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -233,7 +237,7 @@ public class Ventas extends javax.swing.JFrame {
                 jCBCidActionPerformed(evt);
             }
         });
-        jPanel2.add(jCBCid, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 200, -1));
+        jPanel2.add(jCBCid, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 200, -1));
 
         jCBSKU.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jCBSKU.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -243,7 +247,7 @@ public class Ventas extends javax.swing.JFrame {
                 jCBSKUActionPerformed(evt);
             }
         });
-        jPanel2.add(jCBSKU, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 410, -1));
+        jPanel2.add(jCBSKU, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 410, -1));
 
         txtProducto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtProducto.setEnabled(false);
@@ -252,18 +256,18 @@ public class Ventas extends javax.swing.JFrame {
                 txtProductoActionPerformed(evt);
             }
         });
-        jPanel2.add(txtProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 410, -1));
+        jPanel2.add(txtProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, 410, -1));
 
         jLblpuntos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLblpuntos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLblpuntos.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        jPanel2.add(jLblpuntos, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 30, 120, 30));
+        jPanel2.add(jLblpuntos, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 50, 120, 30));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 44, 704, 252));
 
-        jPanel4.setBackground(new java.awt.Color(255, 204, 255));
+        jPanel4.setBackground(new java.awt.Color(102, 204, 255));
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel7.setText("GESTION DE VENTAS");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -273,7 +277,7 @@ public class Ventas extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(432, 432, 432)
                 .addComponent(jLabel7)
-                .addContainerGap(447, Short.MAX_VALUE))
+                .addContainerGap(403, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -306,12 +310,13 @@ public class Ventas extends javax.swing.JFrame {
 
         txtPago.setText("L.");
         txtPago.setBorder(javax.swing.BorderFactory.createTitledBorder("Pago"));
-        getContentPane().add(txtPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 310, 200, 50));
+        getContentPane().add(txtPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 300, 200, 50));
 
         jLabelPuntos.setBorder(javax.swing.BorderFactory.createTitledBorder("Puntos Ganados"));
         getContentPane().add(jLabelPuntos, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 450, 200, 50));
 
-        btnCalcular.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnCalcular.setBackground(new java.awt.Color(204, 255, 255));
+        btnCalcular.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnCalcular.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Estimate.png"))); // NOI18N
         btnCalcular.setText("Calcular");
         btnCalcular.addActionListener(new java.awt.event.ActionListener() {
@@ -321,6 +326,8 @@ public class Ventas extends javax.swing.JFrame {
         });
         getContentPane().add(btnCalcular, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 360, 130, 30));
 
+        btnSalir.setBackground(new java.awt.Color(204, 255, 255));
+        btnSalir.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Export_2.png"))); // NOI18N
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -328,9 +335,10 @@ public class Ventas extends javax.swing.JFrame {
                 btnSalirActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 520, 102, -1));
+        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 520, 110, -1));
 
-        btnImprimirFactura.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnImprimirFactura.setBackground(new java.awt.Color(204, 255, 255));
+        btnImprimirFactura.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnImprimirFactura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Invoice_3.png"))); // NOI18N
         btnImprimirFactura.setText("Imprimir Factura");
         btnImprimirFactura.addActionListener(new java.awt.event.ActionListener() {
@@ -342,16 +350,16 @@ public class Ventas extends javax.swing.JFrame {
 
         jLblImpuesto.setText("L.");
         jLblImpuesto.setBorder(javax.swing.BorderFactory.createTitledBorder("Impuesto"));
-        getContentPane().add(jLblImpuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 110, 200, 50));
+        getContentPane().add(jLblImpuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 100, 200, 50));
 
         jLabeTotalAPagar3.setText("L.");
         jLabeTotalAPagar3.setBorder(javax.swing.BorderFactory.createTitledBorder("Descuento"));
-        getContentPane().add(jLabeTotalAPagar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 170, 200, 50));
+        getContentPane().add(jLabeTotalAPagar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 150, 200, 60));
 
         jLblSubTotal.setText("L.");
         jLblSubTotal.setBorder(javax.swing.BorderFactory.createTitledBorder("Subtotal"));
         getContentPane().add(jLblSubTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 50, 200, 50));
-        getContentPane().add(jTFDescuento1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 180, 120, 30));
+        getContentPane().add(jTFDescuento1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 170, 120, 30));
 
         jTFdPago.setToolTipText("");
         getContentPane().add(jTFdPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 320, 120, 30));
@@ -364,7 +372,8 @@ public class Ventas extends javax.swing.JFrame {
         jLabelCambio1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cambio"));
         getContentPane().add(jLabelCambio1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 390, 200, 50));
 
-        btnActualizar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnActualizar.setBackground(new java.awt.Color(204, 255, 255));
+        btnActualizar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Refresh.png"))); // NOI18N
         btnActualizar.setText("Actualizar");
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -372,7 +381,7 @@ public class Ventas extends javax.swing.JFrame {
                 btnActualizarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 220, -1, 30));
+        getContentPane().add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 210, 130, 40));
 
         pack();
         setLocationRelativeTo(null);
@@ -429,7 +438,8 @@ public class Ventas extends javax.swing.JFrame {
         // Calculate the total to pay
         double totalAPagar = subtotal + impuesto - descuento;
         // Update the total to pay label
-        jLabeTotalAPagar2.setText("L " + String.format("%.2f", totalAPagar)); 
+        jLabeTotalAPagar2.setText("L. " + String.format("%.2f", totalAPagar)); 
+        
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
@@ -569,12 +579,11 @@ public class Ventas extends javax.swing.JFrame {
 
     private void btnImprimirFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirFacturaActionPerformed
         // Gather data from the form
-
-         int id = Integer.parseInt(jTFCodigo.getText());
-        double impuesto = Double.parseDouble(jLblImpuesto.getText().replace("L. ", ""));
-        double descuento = Double.parseDouble(jTFDescuento1.getText());
-        double subtotal = Double.parseDouble(jLblSubTotal.getText().replace("L. ", ""));
-        double totalAPagar = Double.parseDouble(jLabeTotalAPagar2.getText().replace("L. ", ""));
+        int id = Integer.parseInt(jTFCodigo.getText());
+        double impuesto = Double.parseDouble(jLblImpuesto.getText().replace("L. ", "").replace(".", "").replace(",", "."));
+        double descuento = Double.parseDouble(jTFDescuento1.getText().replace(".", "").replace(",", "."));
+        double subtotal = Double.parseDouble(jLblSubTotal.getText().replace("L. ", "").replace(".", "").replace(",", "."));
+        double totalAPagar = Double.parseDouble(jLabeTotalAPagar2.getText().replace("L. ", "").replace(".", "").replace(",", "."));
 
         // Get the selected client ID from jCBCid
         String selectedClient = (String) jCBCid.getSelectedItem();
@@ -595,15 +604,18 @@ public class Ventas extends javax.swing.JFrame {
         }
 
         // Calculate new points
-        String puntosText = jLabelPuntos.getText().replace("P. ", ""); // Extract the number of points earned
+        String puntosText = jLabelPuntos.getText().replace("P. ", "").replace(".", "").replace(",", "."); // Extraer el número de puntos ganados
         int puntosGanados = 0;
         try {
             puntosGanados = Integer.parseInt(puntosText);
         } catch (NumberFormatException e) {
-            puntosGanados = 0; // Default to 0 if parsing fails
+            puntosGanados = 0; // Valor por defecto si el análisis falla
         }
 
         int nuevosPuntos = puntosActuales - (int) descuento + puntosGanados; // Calculate new points
+        if (nuevosPuntos < 0) {
+            nuevosPuntos = 0; // No permitir puntos negativos
+        }
 
         // Assuming you have a variable for the logged-in user ID
         //int usuarioId = getLoggedInUser  Id(); // Replace with your method to get the logged-in user ID
@@ -688,43 +700,26 @@ public class Ventas extends javax.swing.JFrame {
                 pstUpdate.setInt(2, clienteId);
                 pstUpdate.executeUpdate();
                 JOptionPane.showMessageDialog(this, "Puntos actualizados exitosamente.");
-            } catch (Exception e) {
+            } }catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Error al actualizar los puntos del cliente: " + e.getMessage());
             }
-// Preguntar si desea enviar correo
-        int opcion = JOptionPane.showConfirmDialog(this, "¿Deseas enviar el correo al cliente?", "Enviar correo", JOptionPane.YES_NO_OPTION);
-        if (opcion == JOptionPane.YES_OPTION) {
-            String correoCliente = "";
-            String sqlCorreo = "SELECT correo FROM clientes WHERE id = ?";
-            try (PreparedStatement pstCorreo = conn.prepareStatement(sqlCorreo)) {
-                pstCorreo.setInt(1, clienteId);
-                try (ResultSet rsCorreo = pstCorreo.executeQuery()) {
-                    if (rsCorreo.next()) {
-                        correoCliente = rsCorreo.getString("correo");
-                    }
-                }
-            }
 
-            if (correoCliente == null || correoCliente.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "El cliente no tiene un correo válido registrado.");
-            } else {
-                String asunto = "Factura guardada";
-                String mensaje = "Su factura con ID " + id + " fue guardada correctamente.";
-                EnviarCorreo.enviar(correoCliente, asunto, mensaje);
-                JOptionPane.showMessageDialog(this, "Correo enviado al cliente: " + correoCliente);
-            }
-        }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error al guardar la factura: " + e.getMessage());
-        }
+// Preguntar si desea enviar correo
+        // Crear carpeta si no existe
+    java.io.File carpetaFacturas = new java.io.File("C:/factura");
+    if (!carpetaFacturas.exists()) {
+        carpetaFacturas.mkdirs();
+    }
      
         //ReporteFactura
         try {
-        Connection conn = new Conexion().estableceConexion();
+            Connection conn = new Conexion().estableceConexion();
         InputStream jasperStream = getClass().getResourceAsStream("/Reportes/ReportesFactura.jasper");
         if (jasperStream == null) {
             throw new RuntimeException("No se encontro el archivo ReportesFactura.jasper en el classpath.");
         }
+        
+        
 
         JasperReport reporte = (JasperReport) JRLoader.loadObject(jasperStream);
         Map<String, Object> parametros = new HashMap<>();
@@ -734,13 +729,42 @@ public class Ventas extends javax.swing.JFrame {
         JasperViewer viewer = new JasperViewer(print, false);
         viewer.setTitle("Factura #" + id);
         viewer.setVisible(true);
+       
+        // Ruta para guardar PDF
+    String rutaPdf = "C:/factura/factura_" + id + ".pdf";
 
-    } catch (Exception e) {
+    // Exportar PDF
+    JasperExportManager.exportReportToPdfFile(print, rutaPdf);
+    System.out.println("PDF generado correctamente en: " + rutaPdf);
+
+    // Preguntar si desea enviar correo
+    int opcion = JOptionPane.showConfirmDialog(this, "¿Deseas enviar el correo al cliente?", "Enviar correo", JOptionPane.YES_NO_OPTION);
+    if (opcion == JOptionPane.YES_OPTION) {
+        String correoCliente = "";
+        String sqlCorreo = "SELECT correo FROM clientes WHERE id = ?";
+        try (PreparedStatement pstCorreo = conn.prepareStatement(sqlCorreo)) {
+            pstCorreo.setInt(1, clienteId);
+            try (ResultSet rsCorreo = pstCorreo.executeQuery()) {
+                if (rsCorreo.next()) {
+                    correoCliente = rsCorreo.getString("correo");
+                }
+            }
+        }
+
+        if (correoCliente == null || correoCliente.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "El cliente no tiene un correo válido registrado.");
+        } else {
+            String asunto = "Factura guardada";
+            String mensaje = "Su factura con ID " + id + " fue guardada correctamente.";
+            EnviarCorreo.enviar(correoCliente, asunto, mensaje, rutaPdf);
+            JOptionPane.showMessageDialog(this, "Correo enviado al cliente: " + correoCliente);
+        }
+    } 
+        }catch (Exception e) {
         e.printStackTrace();
         JOptionPane.showMessageDialog(this, "Error al guardar o imprimir la factura: " + e.getMessage());
     }
-
-        
+            
     }//GEN-LAST:event_btnImprimirFacturaActionPerformed
 
     /**

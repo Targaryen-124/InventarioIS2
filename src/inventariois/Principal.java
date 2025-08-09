@@ -62,6 +62,8 @@ public class Principal extends javax.swing.JFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jMenuBar1.setBackground(new java.awt.Color(102, 204, 255));
+
         menuUsuarios.setText("Usuarios");
         menuUsuarios.addMenuListener(new javax.swing.event.MenuListener() {
             public void menuCanceled(javax.swing.event.MenuEvent evt) {
